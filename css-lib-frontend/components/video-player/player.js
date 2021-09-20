@@ -16,7 +16,6 @@ function VideoPlayer(props) {
         setVideoPlay(true);
         setVideoPause(false);
         console.log(props.video);
-
     }
 
     const pauseVideo = () => {

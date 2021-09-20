@@ -14,6 +14,8 @@ const Header = dynamic(() => import('../components/layout/Header.js'), {
   ssr: false,
 });
 
+import Footer from '../components/layout/Footer';
+
 
 export default function Home() {
   return (
@@ -25,7 +27,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Header title="Ma librairie components/sass à moi!" subtitle="Où comment se faire son propre framework" />
+        <Header title="Bienvenue au showroom Imal@b" subtitle="L'assistance de demain, dès aujourd'hui" />
 
         <div className={styles.grid}>
 
@@ -59,19 +61,11 @@ export default function Home() {
             </Link>
           </div>
 
-
         </div>
+        <Footer />
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://www.google.fr"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by Moi
-        </a>
-      </footer>
+
     </Fragment>
   )
 }

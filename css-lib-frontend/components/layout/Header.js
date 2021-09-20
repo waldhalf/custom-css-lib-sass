@@ -26,7 +26,7 @@ function Header(props) {
         <div className="header__elem">
 
             <Link href="/">
-                <a><Image src="/images/logo imalab.png" width={50} height={50} alt="logo-imalab" /></a>
+                <a><Image src="/images/logo_imalab.png" width={50} height={50} alt="logo-imalab" /></a>
             </Link>
         </div>
 

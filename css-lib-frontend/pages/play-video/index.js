@@ -11,9 +11,9 @@ function PlayIntroductionVideo() {
 
     // URL des videos local
     const videoUrlList = [
-        '/videos/540/Gas-problem.mp4',
-        '/videos/540/Flat-tire.mp4',
-        '/videos/540/Flat-battery.mp4'
+        '/videos/540/Gas-Problem.mp4',
+        '/videos/540/Flat-Tire.mp4',
+        '/videos/540/Flat-Battery.mp4'
     ]
 
     const video = videoUrlList[Math.floor(Math.random() * videoUrlList.length)];

@@ -191,10 +191,6 @@ function CockpitGrid() {
                     </div>
                 </section>
             }
-
-
-
-
         </Fragment>
     )
 }
