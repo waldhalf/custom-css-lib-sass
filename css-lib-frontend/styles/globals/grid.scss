@@ -1,0 +1,26 @@
+@use '../util' as *;
+
+.card-grid-2-X-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: rem(24);
+
+  &__justify-left {
+    justify-self: start;
+  }
+  &__justify-right {
+    justify-self: end;
+  }
+
+  &__align-top {
+    align-self: flex-start;
+  }
+
+  &__align-center {
+    align-self: center;
+  }
+  &__align-bottom {
+    align-self: flex-end;
+  }
+}

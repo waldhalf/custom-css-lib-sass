@@ -1,0 +1,8 @@
+@use '../util' as *;
+
+.cockpit-grid {
+  display: grid;
+  gap: rem(30);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}

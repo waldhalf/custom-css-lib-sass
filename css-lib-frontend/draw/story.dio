@@ -1,0 +1,28 @@
+<mxfile host="65bd71144e">
+    <diagram id="c7tRi3ojcB70aySr6Au1" name="Page-1">
+        <mxGraphModel dx="660" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Imaginez" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="40" width="250" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Vous êtes sur la route des vacances quand soudain" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="120" width="350" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Image situation" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="260" width="190" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Il est temps d'appeler IMA" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="130" y="440" width="470" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Il va falloir leur expliquer la situation" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="580" width="270" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="Appuyez sur suivant pour la suite" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="635" width="210" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

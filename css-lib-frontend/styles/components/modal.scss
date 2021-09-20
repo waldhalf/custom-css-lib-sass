@@ -1,0 +1,27 @@
+@use '../util/' as *;
+
+.popup {
+  width: rem(1200);
+  display: grid;
+  grid-template-columns: 1fr;
+
+  &__button {
+    width: rem(200);
+    height: rem(50);
+    margin-top: rem(20);
+    margin-bottom: rem(20);
+    justify-self: center;
+    align-self: center;
+    border: none;
+    outline: none;
+    box-shadow: rem(1) rem(1) rem(5) var(--toggle);
+    color: var(--button-player);
+    background: var(--background);
+    cursor: pointer;
+    border-radius: rem(10);
+  }
+}
+
+.during-popup {
+  opacity: 0;
+}

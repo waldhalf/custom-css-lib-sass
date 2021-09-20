@@ -1,0 +1,18 @@
+@use '../util' as *;
+
+.countdown {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 1fr;
+
+  &__text {
+    margin-top: rem(75);
+    justify-self: center;
+  }
+  &__numbers {
+    justify-self: center;
+    font-size: rem(120);
+  }
+}

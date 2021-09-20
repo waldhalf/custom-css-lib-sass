@@ -1,0 +1,45 @@
+@use '../util' as *;
+
+.overview_card {
+  padding: rem(20);
+  background: var(--card-bg);
+  color: var(--text-color2);
+  text-align: center;
+  padding: rem(25);
+  border-radius: rem(5);
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background: var(--card-hover);
+  }
+
+  &__page {
+    font-size: rem(14);
+    font-weight: 700;
+  }
+
+  &__number {
+    font-size: rem(32);
+    color: var(--text-color);
+  }
+
+  &__change {
+    display: flex;
+    font-size: rem(12);
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+
+    &--up {
+      color: var(--limegreen);
+    }
+    &--down {
+      color: var(--brightred);
+    }
+    &--number {
+      margin-left: rem(5);
+    }
+  }
+}
