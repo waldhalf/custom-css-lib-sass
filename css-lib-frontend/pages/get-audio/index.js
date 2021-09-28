@@ -17,8 +17,6 @@ function GetAudio() {
 
     useEffect(() => {
         const SpeechRecognition = window.SpeechRecognition;
-        console.log(SpeechRecognition);
-
         // const mic = new SpeechRecognition();
     }, []);
 

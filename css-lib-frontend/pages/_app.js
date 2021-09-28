@@ -5,11 +5,17 @@ import React from 'react';
 import Layout from '../components/layout/layout';
 import '../styles/main.scss'
 
+// CONTEXT
+import { AppWrapper } from '../components/context/state';
 
 function MyApp({ Component, pageProps }) {
-  return (<Layout>
-    <Component {...pageProps} />
-  </Layout>)
+  return (
+    <AppWrapper>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AppWrapper>
+  )
 
 }
 

@@ -9,6 +9,7 @@ import CockpitDialogWindow from "./CockpitDialogWindow";
 import CockpitItem from "./CockpitItem";
 import Modal from "../layout/Modal";
 import Countdown from '../countdown';
+import VoiceRecognition from '../cockpit/VoiceRecognition';
 
 const imgMoveOut = "/images/move-out.jpg";
 const imgFeelings = "/images/feelings.jpg";
@@ -18,12 +19,29 @@ const imgFileInfo = "/images/file-info.jpg";
 
 const Box = (props) => {
     return (
-        <CockpitItem myRef={props.box.ref} id={props.box.id} name={props.box.name} img={props.box.img} />
+        <CockpitItem
+            myRef={props.box.ref}
+            id={props.box.id}
+            name={props.box.name}
+            img={props.box.img}
+            info={props.info}
+            address={props.address}
+            immat={props.immat}
+            mdv={props.mdv}
+            sentiment={props.sentiment}
+        />
     );
 };
+
 const MainBox = (props) => {
     return (
-        <CockpitDialogWindow myRef={props.box.ref} id={props.box.id} name={props.box.name} />
+        <CockpitDialogWindow
+            myRef={props.box.ref}
+            id={props.box.id}
+            name={props.box.name}
+            currentRecognition={props.currentRecognition}
+            historyRecognition={props.historyRecognition}
+        />
     );
 };
 
@@ -35,7 +53,7 @@ function CockpitGrid() {
 
     // Countdown
     const [startCoundown, setStartCoundown] = useState(false);
-    const hoursMinSecs = { hours: 0, minutes: 0, seconds: 3 };
+    const hoursMinSecs = { hours: 0, minutes: 0, seconds: 1 };
 
     // Main window
     const [showMainWindow, setShowMainWindow] = useState(false);
@@ -48,6 +66,18 @@ function CockpitGrid() {
     const box6 = { id: 'box6', ref: useRef(null), name: "DIALOG-WINDOW" }
     const box7 = { id: 'box7', ref: useRef(null), name: "ANCHOR-METEO", img: imgVehicle }
     const box8 = { id: 'box8', ref: useRef(null), name: "ANCHOR-CODEQ", img: imgVehicle }
+
+    // CurrentRecognition
+    const [currentRecognition, setCurrentRecognition] = useState(["...\n"]);
+    const [historyRecognition, setHistoryRecognition] = useState(["...\n"]);
+    const [isAudioOpen, setIsAudioOpen] = useState(false);
+
+    // INFO
+    const [currentAddressCockpit, setCurrentAddressCockpit] = useState('Adresse non définie');
+    const [currentImmatCockpit, setCurrentImmatCockpit] = useState('Immat non définie');
+    const [currentMDVCockpit, setCurrentMDVCockpit] = useState('MDV non défini');
+    const [currentSentimentCockpit, setCurrentSentimentCockpit] = useState('Sentiment non défini');
+
 
     const [lines] = useState([
         {
@@ -156,42 +186,70 @@ function CockpitGrid() {
                 setShowMainWindow(true);
             }
         }, 1000);
-        console.log(showModal);
     }
 
     return (
-        <Fragment>
-            {showModal && <Modal
-                show={showModal}
-                img={img}
-                handlerShowModal={handlerShowModal}
-            />}
+        <div className="center">
+            <Fragment>
+                {showModal && <Modal
+                    show={showModal}
+                    img={img}
+                    handlerShowModal={handlerShowModal}
+                    hanlerIsAudioOpen={setIsAudioOpen}
+                />}
 
-            {startCoundown && <Countdown hoursMinSecs={hoursMinSecs} countdownType="sec" />}
+                {startCoundown && <Countdown hoursMinSecs={hoursMinSecs} countdownType="sec" />}
 
-            {showMainWindow &&
-                <section className={"container cockpit-grid" + duringPopUp} style={{ position: 'relative', color: 'black' }} id="canvas">
-                    <Box box={box1} />
-                    <Box box={box2} />
-                    <Box box={box3} />
-                    <Box box={box4} />
-                    <Box box={box5} />
-                    <MainBox box={box6} />
-                    <Box box={box7} />
-                    <Box box={box8} />
+                {showMainWindow &&
+                    <section className={"cockpit-grid" + duringPopUp} id="canvas">
+                        <Box box={box1}
+                            mdv={currentMDVCockpit}
+                        />
+                        <Box box={box2}
+                            sentiment={currentSentimentCockpit} />
+                        <Box box={box3}
+                        />
+                        {/* FILE INFO */}
+                        <Box box={box4}
+                            address={currentAddressCockpit}
+                            immat={currentImmatCockpit} />
 
-                    <div className={duringPopUp}>
-                        <Xarrow {...lines[0]} />
-                        <Xarrow {...lines[1]} />
-                        <Xarrow {...lines[2]} />
-                        <Xarrow {...lines[3]} />
-                        <Xarrow {...lines[4]} />
-                        <Xarrow {...lines[5]} />
-                        <Xarrow {...lines[6]} />
-                    </div>
-                </section>
-            }
-        </Fragment>
+                        <Box box={box5} />
+                        <MainBox box={box6}
+                            currentRecognition={currentRecognition}
+                            historyRecognition={historyRecognition}
+                        />
+                        <Box box={box7} />
+                        <Box box={box8} />
+
+                        <div className={duringPopUp}>
+                            <Xarrow {...lines[0]} />
+                            <Xarrow {...lines[1]} />
+                            <Xarrow {...lines[2]} />
+                            <Xarrow {...lines[3]} />
+                            <Xarrow {...lines[4]} />
+                            <Xarrow {...lines[5]} />
+                            <Xarrow {...lines[6]} />
+                        </div>
+                    </section>
+                }
+
+                <div className="content-flex content-flex__justify-center">
+                    <VoiceRecognition
+                        isAudioOpen={isAudioOpen}
+                        currentRecognitionCockpit={setCurrentRecognition}
+                        historyRecognitionCockpit={setHistoryRecognition}
+                        currentAddressCockpit={setCurrentAddressCockpit}
+                        currentImmatCockpit={setCurrentImmatCockpit}
+                        currentMDVCockpit={setCurrentMDVCockpit}
+                        currentSentimentCockpit={setCurrentSentimentCockpit}
+                    />
+                </div>
+
+            </Fragment>
+
+        </div>
+
     )
 }
 

@@ -1,25 +1,21 @@
 @use '../util/' as *;
 
 .header {
-  display: flex;
-  margin-top: rem(36);
-  flex-wrap: wrap;
-  justify-content: space-between;
+  max-width: rem(1100);
+  display: grid;
+  // margin-top: rem(36);
+  // margin-bottom: rem(36);
+  // margin-left: auto;
+  // margin-right: auto;
+  margin: rem(36) auto rem(36) auto;
+  grid-template-columns: repeat(3, 1fr);
 
   @include breakpoint(medium) {
     align-items: center;
   }
-  &__elem {
-    display: flex;
-    justify-content: center;
-    width: rem(200);
-  }
+
   &__title {
-    width: 100%;
-    justify-self: center;
-    @include breakpoint(medium) {
-      width: auto;
-    }
+    margin: auto;
   }
 
   &__subtitle {

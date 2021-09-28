@@ -22,35 +22,27 @@ function Header(props) {
         setActiveTheme(inactiveTheme)
     }
 
-    return (<header className="header container">
-        <div className="header__elem">
-
-            <Link href="/">
-                <a><Image src="/images/logo_imalab.png" width={50} height={50} alt="logo-imalab" /></a>
-            </Link>
+    return (<header className="header">
+        <Link href="/">
+            <a><Image src="/images/logo_imalab.png" width={50} height={50} alt="logo-imalab" /></a>
+        </Link>
+        <div className="header__title">
+            <h1>{title}</h1>
+            <span className="header__subtitle">{subtitle}</span>
         </div>
-
-        <div className="header__elem">
-            <div className="header__title">
-                <h1>{title}</h1>
-                <span className="header__subtitle">{subtitle}</span>
+        <fieldset
+            className="header__toggle toggle"
+            aria-label="theme toggle"
+            role="radiogroup"
+        >
+            <label htmlFor="dark">Dark Mode</label>
+            <div className="toggle__wrapper" >
+                <input type="radio" name="theme" id="dark" onChange={onChangeHandler} checked={isCheckedDark} />
+                <input type="radio" name="theme" id="light" onChange={onChangeHandler} checked={isCheckedLight} />
+                <span aria-hidden="true" className="toggle__background"></span>
+                <span aria-hidden="true" className="toggle__button"></span>
             </div>
-        </div>
-        <div className="header__elem">
-            <fieldset
-                className="header__toggle toggle"
-                aria-label="theme toggle"
-                role="radiogroup"
-            >
-                <label htmlFor="dark">Dark Mode</label>
-                <div className="toggle__wrapper" >
-                    <input type="radio" name="theme" id="dark" onChange={onChangeHandler} checked={isCheckedDark} />
-                    <input type="radio" name="theme" id="light" onChange={onChangeHandler} checked={isCheckedLight} />
-                    <span aria-hidden="true" className="toggle__background"></span>
-                    <span aria-hidden="true" className="toggle__button"></span>
-                </div>
-            </fieldset>
-        </div>
+        </fieldset>
     </header>)
 }
 

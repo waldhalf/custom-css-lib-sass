@@ -1,0 +1,727 @@
+/* CARTE DE CREDIT */
+@import url("https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i");
+@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@1,100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Allison&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+@font-face {
+  font-family: "incosolota";
+  src: url("../fonts/Inconsolata-Regular.ttf") format("ttf");
+}
+
+.handsfree-canvas-video {
+  background: #000;
+  opacity: 0.1;
+}
+
+#buttonInfo,
+#AbuttonRestart,
+#split-pane-or,
+/* exercice card */
+#exerciceCard,
+/* #messageCopierColler, */
+#divpasserSecondExercice,
+/* exercice dossier */
+#exerciceDossier,
+#passerTroisiemeExercice,
+/* exercice gesture */
+#exerciceGesture {
+  display: none;
+}
+
+.messageCopierCollerTransparent {
+  opacity: 0;
+}
+
+.messageCopierCollerVisible {
+  opacity: 1;
+}
+
+.messageBazardTransparent {
+  opacity: 0;
+}
+
+.messageBazardVisible {
+  opacity: 1;
+}
+
+#split-pane-or {
+  font-size: 2em;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  /* width: 100%; */
+  /* position: absolute; */
+  top: 20px;
+  /* -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%); */
+}
+
+.passerTroisiemeExerciceStyleVerrouille {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.passerTroisiemeExerciceStyleDeverrouille {
+  opacity: 1;
+}
+
+.passerTroisiemeExerciceStyleButton {
+  background-color: transparent;
+}
+
+#passerTroisiemeExercice {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}
+
+.card {
+  width: 320px;
+  height: 190px;
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  perspective: 600px;
+}
+
+.card__part {
+  box-shadow: 1px 1px #aaa3a3;
+  top: 0;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  display: inline-block;
+  width: 450px;
+  height: 260px;
+  background-image: url("https://image.ibb.co/bVnMrc/g3095.png"),
+    linear-gradient(to right bottom, #ec4879, #69c9fd);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px;
+
+  -webkit-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -moz-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -ms-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -o-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+}
+
+.card__front {
+  padding: 18px;
+  -webkit-transform: rotateY(0);
+  -moz-transform: rotateY(0);
+}
+
+.card__back {
+  padding: 18px 0;
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+}
+
+.card__black-line {
+  margin-top: 5px;
+  height: 38px;
+  background-color: #303030;
+}
+
+.card__logo {
+  height: 32px;
+}
+
+.card__front-logo {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+}
+
+.card__square {
+  border-radius: 5px;
+  height: 30px;
+}
+
+.card_numer {
+  display: block;
+  width: 100%;
+  word-spacing: 4px;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.card__space-75 {
+  width: 75%;
+  float: left;
+}
+
+.card__space-25 {
+  width: 25%;
+  float: left;
+}
+
+.card__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+}
+
+.card__info {
+  margin-bottom: 0;
+  margin-top: 5px;
+  font-size: 16px;
+  line-height: 18px;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.card__back-content {
+  padding: 15px 15px 0;
+}
+
+.card__secret--last {
+  color: #303030;
+  text-align: right;
+  margin: 0;
+  font-size: 14px;
+}
+
+.card__secret {
+  padding: 5px 12px;
+  background-color: #fff;
+  position: relative;
+}
+
+.card__secret:before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  height: calc(100% + 6px);
+  width: calc(100% - 42px);
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    45deg,
+    #ededed,
+    #ededed 5px,
+    #f9f9f9 5px,
+    #f9f9f9 10px
+  );
+}
+
+.card__back-logo {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+.card__back-square {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+
+/* .card:hover .card__front {
+     -webkit-transform: rotateY(180deg);
+     -moz-transform: rotateY(180deg);
+ 
+ }
+ 
+ .card:hover .card__back {
+     -webkit-transform: rotateY(0deg);
+     -moz-transform: rotateY(0deg);
+ } */
+
+.homePageIMAlogoCentered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* #buttonInfo {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+} */
+
+/* #buttonRestart {
+  position: fixed;
+  right: 40px;
+  top: 15px;
+  cursor: pointer;
+} */
+
+.textModal {
+  color:#283c50; font-size:15px; font-family: 'Ubuntu', sans-serif; font-weight: 500;
+}
+
+#aButtonInfo {
+  color: #283c50;
+  font-size: 40px;
+}
+
+.panel {
+  border-radius: 0.3rem;
+  padding: 1rem;
+  /* margin-bottom: 1rem; */
+}
+
+.panel.panel-blue {
+  box-shadow: 0px 0px 25px 5px #f2f2f2;
+  /* border: 1px solid #8241e1; */
+  /* background-color: #f0ebfa; */
+  /* color: #0087FF; */
+}
+
+.panel.panel-purple {
+  border: 1px solid #f0ebfa;
+  background-color: #f0ebfa;
+  /* color: #7F51F4; */
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  /* z-index: 1; */
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-color: #283c50;
+}
+
+.right {
+  right: 0;
+  background-color: #ffb91e;
+}
+
+.textShowRoomIma {
+  font-family: "EntezaOldSansBlackreZohoor2", monospace;
+  font-weight: 900;
+  font-size: 90px;
+  color: #ffb91e;
+  letter-spacing: 5px;
+}
+
+.divOzRamos {
+  float: right;
+  margin: 5px;
+}
+
+.ozRamos {
+  font-family: "Allison", cursive;
+  font-weight: 900;
+  font-size: 40px;
+  right: 30px;
+  color: #ffb91e;
+}
+
+.txtLandingPage {
+  font-family: "Ubuntu", sans-serif;
+  color: #5b6e83;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.txtRecommencer {
+  font-family: "Ubuntu", sans-serif;
+  color: #5b6e83;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+
+#startButton {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}
+
+.btn-right {
+  background: none;
+  border: 0;
+  font-size: 20px;
+  line-height: 2em;
+  position: relative;
+  width: 18em;
+  height: 4em;
+}
+
+.btn-right a {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-right::before,
+.btn-right::after {
+  background: #29c0d5;
+  border-radius: 2px;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: all 1s;
+  height: 2em;
+}
+
+.btn-right::before {
+  box-shadow: -1px 1px 0 #1897c0, -2px 2px 0 #1897c0, -3px 3px 0 #1897c0,
+    -4px 4px 0 #1897c0;
+  transform: skew(45deg);
+  top: 0;
+}
+
+.btn-right::after {
+  box-shadow: 1px 1px 0 #1897c0, 2px 2px 0 #1897c0, 3px 3px 0 #1897c0,
+    4px 4px 0 #1897c0;
+  transform: skew(-45deg);
+  bottom: 0;
+}
+
+.btn-right:hover::before,
+.btn-right:hover::after {
+  background: #68d3e2;
+}
+
+.btn-right:focus {
+  outline: 0;
+}
+
+.btn-right:focus::before,
+.btn-right:focus::after {
+  background: #68d3e2;
+}
+
+.modalHeader {
+  background-color: #f59b14;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.modalHeaderText {
+  background-color: #f59b14;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  color: white;
+  /* letter-spacing: 5px; */
+}
+
+.divStyleImageModalRedDot {
+  grid-column: 1;
+  overflow: hidden;
+}
+
+.styleImageModalRedDot {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: scale-down;
+}
+
+.divStyleImageModalGif {
+  grid-column: 2;
+  overflow: hidden;
+}
+
+.styleImageModalGif {
+  height: 200px;
+  max-width: 100%;
+  object-fit: scale-down;
+}
+
+.modalText {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  color: #f59b14;
+}
+
+.modalIndexImage {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: scale-down;
+}
+
+.txtExo1Explication {
+  font-family: "Ubuntu", sans-serif;
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.copieText {
+    font-family: "Ubuntu", sans-serif;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+
+
+.panelCard {
+  height: 300px;
+  display: block;
+}
+
+.panelFloatContainer {
+  margin-top: 4rem;
+}
+
+.cardNumberStyle {
+  font-size: 25px;
+  border: 3px;
+  border-style: solid;
+  border-color: #ff0000;
+  text-align: center;
+}
+
+.panelFloatContainer2 {
+  margin-top: 3rem;
+}
+
+.pointerHand {
+  height: 300px;
+  display: block;
+  position: relative;
+}
+
+.pointerHandLogo {
+  position: relative;
+  top: 50%;
+}
+
+.pointerHandDossier {
+  height: 600px;
+  display: block;
+  position: relative;
+}
+
+.cardInputField {
+  height: 300px;
+  display: block;
+  position: relative;
+}
+
+.cardMyDiv3 {
+  width: 100%;
+  flex: 1;
+  position: relative;
+  top: 50%;
+}
+
+.cardMyDiv3Input {
+  border-radius: 25px;
+  border: 2px solid grey;
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 30px;
+  height: 15px;
+}
+
+.cardMyDiv3Button {
+  margin-right: 20px;
+  background-color: #e7e7e7;
+}
+
+.cardMyDiv3EnvoyerDeactivated {
+  opacity: 0.25;
+  pointer-events: none;
+  margin-left: 20px;
+}
+
+.cardMyDiv3EnvoyerActivated {
+  opacity: 1;
+  margin-left: 20px;
+}
+
+.exerciceDossierStyle {
+  margin-top: 50px;
+}
+
+.folderPanel {
+  height: 600px;
+  display: block;
+}
+
+.folderPanelDiv {
+  position: relative;
+  top: 25%;
+}
+
+.divFolderAlignCenter {
+  position: relative;
+  top: 25%;
+}
+
+.rowFolder {
+  flex-wrap: inherit;
+  padding: 20px;
+  width: 90%;
+}
+
+.neuromorphicFolder {
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.panelFolderDiv {
+  height: 600px;
+  display: block;
+  position: relative;
+}
+
+.folderImg {
+  width: 350px;
+  height: auto;
+}
+
+.gestureRow {
+  margin-top: 100px;
+}
+
+.gestureDiv {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.gestureDflex {
+  height: 70vh;
+}
+
+#divpasserSecondExercice {
+  position: fixed;
+  bottom: 40px;
+  right: 60px;
+}
+
+.passerSecondExerciceStyleVerrouille {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.passerSecondExerciceStyleDeverrouille {
+  opacity: 1;
+  /* pointer-events: none; */
+}
+
+.passerSecondExerciceStyleButton {
+  background-color: transparent;
+}
+
+.logo_slider {
+  overflow: hidden;
+}
+
+.logo_slider ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  position: relative;
+  animation: mymove 30s linear infinite;
+}
+
+.logo_slider ul li {
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: block;
+
+  margin: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.logo_slider ul li a img {
+  width: 100%;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes mymove {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* Standard syntax */
+
+@keyframes mymove {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+.elementNeuromorphicFolder {
+  align-items: center;
+  background-color: #1897c0;
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  display: flex;
+  /* height: auto; */
+  justify-content: center;
+  margin-right: 4rem;
+  /* width: 200px; */
+}
+
+.gesture-emoji {
+  font-size: 150px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  opacity: 0.2;
+}
+
+.gesture-emoji.active {
+  opacity: 1;
+}
+
+#copiedSignal {
+  font-family: Nunito, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 16px 36px;
+  border-radius: 8px;
+  background: rgb(122, 122, 122);
+  letter-spacing: 0.3px;
+  box-shadow: 0px 12px 17px rgba(0, 0, 0, 0.26);
+  font-weight: 600;
+  opacity: 0;
+}
+
+#copiedSignal.show {
+  opacity: 1;
+  transition: none;
+}

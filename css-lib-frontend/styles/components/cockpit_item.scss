@@ -6,6 +6,7 @@
     max-height: rem(300);
     text-align: center;
     border-radius: rem(10);
+    margin: 0;
 
     &__image {
       border-top-left-radius: rem(10);
@@ -29,8 +30,18 @@
       color: var(--text-color);
       width: 90%;
       height: 95%;
+      margin: 0;
       cursor: pointer;
       transition: 0.3s all ease-in-out;
+
+      h5 {
+        margin-top: rem(5);
+        margin-bottom: rem(5);
+      }
+      p {
+        margin-top: rem(5);
+        margin-bottom: rem(5);
+      }
     }
     &__header {
       text-transform: uppercase;

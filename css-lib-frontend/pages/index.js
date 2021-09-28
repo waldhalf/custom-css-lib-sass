@@ -26,11 +26,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main className="container">
         <Header title="Bienvenue au showroom Imal@b" subtitle="L'assistance de demain, dès aujourd'hui" />
 
-        <div className={styles.grid}>
 
+        <div className="vh-60 center">
           <div className={styles.card}>
             <Link href="/social-media-dashboard" >
               <a className={styles.index__link}>Dashboard Social Media &rarr;</a>
@@ -44,24 +44,18 @@ export default function Home() {
           </div>
 
           <div className={styles.card}>
-            <Link href="/get-audio">
-              <a className={styles.index__link}>Get Audio &rarr;</a>
-            </Link>
-          </div>
-
-          <div className={styles.card}>
             <Link href="/play-video">
               <a className={styles.index__link}>Video Player &rarr;</a>
             </Link>
           </div>
 
           <div className={styles.card}>
-            <Link href="/buttons">
-              <a className={styles.index__link}>Buttons &rarr;</a>
+            <Link href="/handsfree_index.html">
+              <a className={styles.index__link}>Démo Hansdfree &rarr;</a>
             </Link>
           </div>
-
         </div>
+
         <Footer />
       </main>
 

@@ -26,7 +26,7 @@ function Countdown(props) {
         return () => clearInterval(timerId);
     });
 
-    return <div >
+    return <div className="container">
 
         {!finish && <div className="countdown">
             <p className="countdown__text">Attendez quelques secondes que je me connecte...</p>

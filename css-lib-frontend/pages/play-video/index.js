@@ -17,7 +17,7 @@ function PlayIntroductionVideo() {
     ]
 
     const video = videoUrlList[Math.floor(Math.random() * videoUrlList.length)];
-    return (<div>
+    return (<div className="container">
         <Header title="Imaginez..." subtitle="un monde pas si éloigné que ça..."></Header>
         <div className="container">
             <VideoPlayer video={video}></VideoPlayer>

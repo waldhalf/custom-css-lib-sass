@@ -14,8 +14,10 @@ import CockpitGrid from '../../components/cockpit/CockpitGrid.js';
 
 function Cockpit() {
     return (<Fragment>
-        <Header title="Cockpit" subtitle="La voix digitale" />
-        <CockpitGrid />
+        <div className="container">
+            <Header title="Cockpit" subtitle="La voix digitale" />
+            <CockpitGrid />
+        </div>
     </Fragment>)
 }
 
