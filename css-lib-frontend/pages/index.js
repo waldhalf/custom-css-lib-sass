@@ -3,7 +3,6 @@ import { Fragment } from 'react';
 
 import Head from 'next/head'
 import Link from 'next/link';
-import Image from 'next/image'
 import styles from '../styles/Home.module.scss';
 
 // NEXT
@@ -28,7 +27,6 @@ export default function Home() {
 
       <main className="container">
         <Header title="Bienvenue au showroom Imal@b" subtitle="L'assistance de demain, dès aujourd'hui" />
-
 
         <div className="vh-60 center">
           <div className={styles.card}>
@@ -55,11 +53,8 @@ export default function Home() {
             </Link>
           </div>
         </div>
-
         <Footer />
       </main>
-
-
     </Fragment>
   )
 }

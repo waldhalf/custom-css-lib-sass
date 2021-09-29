@@ -15,7 +15,7 @@ import {
 
 const sampleRate = 16000;
 
-const loadPCMWorker = (audioContext: AudioContext) =>
+const loadPCMWorker = async (audioContext: AudioContext) =>
   audioContext.audioWorklet.addModule("/pcmWorker.js");
 
 const getMediaStream = () =>
@@ -87,10 +87,22 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
 
   const connect = () => {
     console.log("connecting");
+
     connection?.close();
-    const conn = new WebSocket(
-      "ws://localhost:8080/v1/ws/stt?numcharge=12345&showroom=showroom"
+    let isDevelopment = true;
+    if (process.env.NODE_ENV === "production") isDevelopment = false;
+    // const location = isDevelopment ? "localhost:8080" : document.location.host;
+    const location = isDevelopment
+      ? "localhost:8080"
+      : "imalab-showroom-backend.herokuapp.com";
+    const url = encodeURI(
+      `${document.location.protocol.replace(
+        "http",
+        "ws"
+      )}//${location}/v1/ws/stt?numcharge=12345&showroom=showroom`
     );
+
+    const conn = new WebSocket(url);
     conn.onmessage = (event) => speechRecognized(JSON.parse(event.data));
     setConnection(conn);
   };

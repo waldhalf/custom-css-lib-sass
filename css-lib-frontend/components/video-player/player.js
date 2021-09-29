@@ -1,5 +1,5 @@
 // REACT
-import { useEffect, useRef, useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 
 // NEXTJS
 import Link from 'next/link';
