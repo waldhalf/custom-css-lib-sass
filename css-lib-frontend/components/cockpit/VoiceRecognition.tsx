@@ -3,6 +3,8 @@ import React, { Fragment, useEffect, useState } from "react";
 
 // THIRD PARTY
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
 
 // HELPERS
 import {
@@ -158,9 +160,17 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
         </button>
       )}
       {showStop && (
-        <button className='popup__button' onClick={disconnect}>
-          Stop
-        </button>
+        // <button className='popup__button' onClick={disconnect}>
+        //   Stop
+        // </button>
+        <div className='cockpit__button-stop'>
+          <button
+            className='btn__fun-button btn__fun-button--first'
+            onClick={disconnect}
+          >
+            <FontAwesomeIcon icon={faPhoneSlash} />
+          </button>
+        </div>
       )}
       {/* <h2>{currentRecognition}</h2>
       {recognitionHistory.map((tx, idx) => (
