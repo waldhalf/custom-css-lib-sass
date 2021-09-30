@@ -4,7 +4,7 @@ import Link from 'next/link';
 function CardHome(props) {
 
 
-    return (<div className="card__home card__home--vertical">
+    return (<div className="card__home--vertical">
         <article className="card__home__box">
             <div className="card__home__image">
                 <Image src={props.image} width="1500" height="1368" alt="" />

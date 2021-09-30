@@ -54,6 +54,16 @@
     }
   }
 
+  &__button-stop {
+    // grid-column: 5/6;
+    // grid-row: 1/2;
+    // justify-self: flex-end;
+    position: absolute;
+    margin-top: 100px;
+    top: 0;
+    right: 0;
+  }
+
   &__mdv {
     grid-column: 1/4;
     grid-row: 1/2;

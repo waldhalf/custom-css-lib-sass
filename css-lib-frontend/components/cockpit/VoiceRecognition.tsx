@@ -3,6 +3,8 @@ import React, {Fragment, useEffect, useState} from "react";
 
 // THIRD PARTY
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
 
 // HELPERS
 import {
@@ -126,52 +128,32 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
         const url = encodeURI(
             `${document.location.protocol}://${location}/closechannel?showroom=showroom`
         );
-        axios.post(url, {method: "POST"}).then((r) => console.log(r.status));
-        connection?.close();
-        setConnection(undefined);
-    };
+        audioContext.close();
+      };
+    }
+  }, [connection]);
 
-    useEffect(() => {
-        if (props.isAudioOpen && !connection) {
-            connect();
-        }
-        if (!props.isAudioOpen && connection) {
-            disconnect();
-        }
-    }, [props.isAudioOpen]);
-
-    useEffect(() => {
-        if (connection) {
-            const audioContext = new window.AudioContext({sampleRate});
-            const stream = Promise.all([
-                loadPCMWorker(audioContext),
-                getMediaStream(),
-            ]).then(([_, stream]) => {
-                captureAudio(audioContext, stream, (data) => connection.send(data));
-                return stream;
-            });
-            return () => {
-                stream.then((stream) =>
-                    stream.getTracks().forEach((track) => track.stop())
-                );
-                audioContext.close();
-            };
-        }
-    }, [connection]);
-
-    return (
-        <Fragment>
-            {props.buttonType === "start" && (
-                <button className='popup__button' onClick={connect}>
-                    Commencer !
-                </button>
-            )}
-            {showStop && (
-                <button className='popup__button' onClick={disconnect}>
-                    Stop
-                </button>
-            )}
-            {/* <h2>{currentRecognition}</h2>
+  return (
+    <Fragment>
+      {props.buttonType === "start" && (
+        <button className='popup__button' onClick={connect}>
+          Commencer !
+        </button>
+      )}
+      {showStop && (
+        // <button className='popup__button' onClick={disconnect}>
+        //   Stop
+        // </button>
+        <div className='cockpit__button-stop'>
+          <button
+            className='btn__fun-button btn__fun-button--first'
+            onClick={disconnect}
+          >
+            <FontAwesomeIcon icon={faPhoneSlash} />
+          </button>
+        </div>
+      )}
+      {/* <h2>{currentRecognition}</h2>
       {recognitionHistory.map((tx, idx) => (
         <h2 key={idx}>{tx}</h2>
       ))} */}

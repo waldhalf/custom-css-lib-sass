@@ -6,7 +6,7 @@ import Link from 'next/link';
 // THIRD PARTY
 import ReactPlayer from 'react-player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
 
 function VideoPlayer(props) {
     const [videoPlay, setVideoPlay] = useState(false);

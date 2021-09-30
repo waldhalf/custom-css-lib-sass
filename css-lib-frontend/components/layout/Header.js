@@ -23,7 +23,17 @@ function Header(props) {
     }
 
     return (<header className="header">
-        <Link href="/">
+        {/* <div className="content-flex">
+            <div className="content-flex__align-center">
+                <Link href="/" >
+                    <a><Image src="/images/logo_imalab.png" width={50} height={50} alt="logo-imalab" /></a>
+                </Link>
+            </div>
+            <div className="ml-25">
+                <button className='popup__button' >Stopper la conversation</button>
+            </div>
+        </div> */}
+        <Link href="/" >
             <a><Image src="/images/logo_imalab.png" width={50} height={50} alt="logo-imalab" /></a>
         </Link>
         <div className="header__title">
