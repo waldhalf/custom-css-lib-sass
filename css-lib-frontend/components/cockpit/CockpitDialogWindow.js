@@ -12,13 +12,9 @@ function CockpitDialogWindow(props) {
         textInverse += historyRecognition[startingIndex].trim() + '\n';
     }
 
-    function onChangeHandler() {
-        textArea.scrollTop = textArea.scrollHeight;
-        console.log(textArea);
-    }
-
     useEffect(() => {
-        console.log('La conversation change')
+        console.log('La conversation change');
+        textArea.current.scrollTop = textArea.current.scrollHeight;
     }, [historyRecognition]);
 
 
@@ -31,7 +27,6 @@ function CockpitDialogWindow(props) {
             rows="2"
             readOnly
             ref={textArea}
-            onChange={onChangeHandler}
         ></textarea>
     </div>)
 }
