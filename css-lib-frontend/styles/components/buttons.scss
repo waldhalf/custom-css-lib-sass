@@ -1,6 +1,6 @@
 @use '../util' as *;
 
-$color: #0cf;
+$color: #20aee6;
 $cyan: #0505a9;
 $dark: #ffffff;
 $borderW: 2px;
@@ -610,17 +610,21 @@ $speed: 0.5s;
 
   &__next-arrow-expand {
     position: relative;
-    background: blue;
+    background: $color;
     border: none;
+    border-radius: rem(5);
     color: white;
     text-align: center;
     font-weight: bold;
     font-size: rem(18);
     padding: rem(10);
-    width: rem(200);
-    height: rem(70);
+    width: rem(80);
+    height: rem(40);
     cursor: pointer;
     transition: all 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     &:hover {
       span {
         padding-right: 25px;

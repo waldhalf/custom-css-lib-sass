@@ -12,8 +12,8 @@ import dynamic from "next/dynamic";
 const Header = dynamic(() => import('../components/layout/Header.js'), {
   ssr: false,
 });
-
 import Footer from '../components/layout/Footer';
+import CardHome from '../components/card-home/CardHome';
 
 
 export default function Home() {
@@ -28,22 +28,18 @@ export default function Home() {
       <main className="container">
         <Header title="Bienvenue au showroom Imal@b" subtitle="L'assistance de demain, dès aujourd'hui" />
 
-        <div className="vh-60 center">
-          <div className={styles.card}>
-            <Link href="/social-media-dashboard" >
-              <a className={styles.index__link}>Dashboard Social Media &rarr;</a>
-            </Link>
-          </div>
 
-          <div className={styles.card}>
+        <div className="content-flex content-flex__justify-between content-flex__stretch">
+
+          {/* <div className={styles.card}>
             <Link href="/cockpit">
-              <a className={styles.index__link}>Cockpit &rarr;</a>
+              <a className={styles.index__link}>Démo Uberduck &rarr;</a>
             </Link>
           </div>
 
           <div className={styles.card}>
             <Link href="/play-video">
-              <a className={styles.index__link}>Video Player &rarr;</a>
+              <a className={styles.index__link}>Démo live &rarr;</a>
             </Link>
           </div>
 
@@ -51,8 +47,35 @@ export default function Home() {
             <Link href="/handsfree_index.html">
               <a className={styles.index__link}>Démo Hansdfree &rarr;</a>
             </Link>
-          </div>
+          </div> */}
+
+
+          <CardHome
+            image={'/images/uberduck.jpg'}
+            url={'/uberduck'}
+            title={'Parlez, et nous traduisons'}
+            desc={"Grâce à l'intelligence atificielle nous pouvons comprendre ce que vous dîtes en temps réel et le traduire à la volée afin d'être énoncé avec une autre voix que la votre. "}
+
+          />
+          <CardHome
+            image={'/images/tts.jpg'}
+            url={'/play-video'}
+            title={"Et si on travaillait ensemble?"}
+            desc={"Quand l'intelligence artificielle vient donner des outils complémentaires au chargé d'assistance."} />
+
+          <CardHome
+            image={'/images/hands.jpg'}
+            url={'/handsfree_index.html'}
+            title={"Oublions la souris un instant..."}
+            desc={"Grâce à la webcam nous regardons vos mains et vous pouvez intérargir avec le PC avec ces dernières."} />
+
+
+
         </div>
+
+
+
+
         <Footer />
       </main>
     </Fragment>

@@ -62,6 +62,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
   const [recognitionHistory, setRecognitionHistory] = useState<Array<string>>(
     []
   );
+  const [showStop, setShowStop] = useState(false);
 
   const speechRecognized = (data) => {
     if (data?.type === SET_LIVE_TRANSCRIPT) {
@@ -87,7 +88,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
 
   const connect = () => {
     console.log("connecting");
-
+    setShowStop(true);
     connection?.close();
     let isDevelopment = true;
     if (process.env.NODE_ENV === "production") isDevelopment = false;
@@ -108,9 +109,15 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
   };
 
   const disconnect = () => {
-    axios
-      .post("/closechannel?showroom=showroom", { method: "POST" })
-      .then((r) => console.log(r.status));
+    let isDevelopment = true;
+    if (process.env.NODE_ENV === "production") isDevelopment = false;
+    const location = isDevelopment
+      ? "localhost:8080"
+      : "imalab-showroom-backend.herokuapp.com";
+    const url = encodeURI(
+      `${document.location.protocol}://${location}/closechannel?showroom=showroom`
+    );
+    axios.post(url, { method: "POST" }).then((r) => console.log(r.status));
     connection?.close();
     setConnection(undefined);
   };
@@ -150,7 +157,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
           Commencer !
         </button>
       )}
-      {props.buttonType === "stop" && (
+      {showStop && (
         <button className='popup__button' onClick={disconnect}>
           Stop
         </button>
