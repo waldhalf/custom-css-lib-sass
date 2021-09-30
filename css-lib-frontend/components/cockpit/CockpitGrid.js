@@ -32,6 +32,7 @@ const Box = (props) => {
             immat={props.immat}
             mdv={props.mdv}
             sentiment={props.sentiment}
+            panne={props.panne}
         />
     );
 };
@@ -77,6 +78,7 @@ function CockpitGrid() {
 
     // INFO
     const [currentAddressCockpit, setCurrentAddressCockpit] = useState('');
+    const [currentIncidentCockpit, setCurrentIncidentCockpit] = useState('');
     const [currentImmatCockpit, setCurrentImmatCockpit] = useState('');
     const [currentMDVCockpit, setCurrentMDVCockpit] = useState('');
     const [currentSentimentCockpit, setCurrentSentimentCockpit] = useState('');
@@ -218,6 +220,7 @@ function CockpitGrid() {
                     {/* FILE INFO */}
                     <Box box={boxEntities}
                          address={currentAddressCockpit}
+                         panne={currentIncidentCockpit}
                     />
 
                     <Box box={boxDataVeh}
@@ -250,6 +253,7 @@ function CockpitGrid() {
                         currentRecognitionCockpit={setCurrentRecognition}
                         historyRecognitionCockpit={setHistoryRecognition}
                         currentAddressCockpit={setCurrentAddressCockpit}
+                        currentIncidentCockpit={setCurrentIncidentCockpit}
                         currentImmatCockpit={setCurrentImmatCockpit}
                         currentMDVCockpit={setCurrentMDVCockpit}
                         currentSentimentCockpit={setCurrentSentimentCockpit}

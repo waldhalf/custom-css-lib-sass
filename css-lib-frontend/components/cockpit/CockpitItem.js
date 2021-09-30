@@ -14,6 +14,9 @@ function CockpitItem(props) {
                     {props.address && <Fragment><h4>Localisation :</h4>
                         <p className="">{props.address}</p></Fragment>
                     }
+                    {props.panne && <Fragment><h4>Panne :</h4>
+                        <p className="">{props.panne}</p></Fragment>
+                    }
                     {props.immat && <Fragment>
                         <h4>Immatriculation :</h4>
                         <p>{props.immat}</p>
