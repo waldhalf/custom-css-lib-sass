@@ -1,5 +1,5 @@
 // REACT
-import React, { useRef, useState, Fragment } from 'react';
+import React, {useRef, useState, Fragment} from 'react';
 
 // THIRD PARTY
 import Xarrow from 'react-xarrows';
@@ -26,6 +26,9 @@ const Box = (props) => {
             img={props.box.img}
             info={props.info}
             address={props.address}
+            conducteur={props.conducteur}
+            assureur={props.assureur}
+            tires={props.tires}
             immat={props.immat}
             mdv={props.mdv}
             sentiment={props.sentiment}
@@ -53,19 +56,19 @@ function CockpitGrid() {
 
     // Countdown
     const [startCoundown, setStartCoundown] = useState(false);
-    const hoursMinSecs = { hours: 0, minutes: 0, seconds: 1 };
+    const hoursMinSecs = {hours: 0, minutes: 0, seconds: 1};
 
     // Main window
     const [showMainWindow, setShowMainWindow] = useState(false);
 
-    const box1 = { id: 'box1', ref: useRef(null), name: "MDV", img: imgMoveOut };
-    const box2 = { id: 'box2', ref: useRef(null), name: "CODEQ", img: imgFeelings };
-    const box3 = { id: 'box3', ref: useRef(null), name: "METEO", img: imgWeather }
-    const box4 = { id: 'box4', ref: useRef(null), name: "FILE-INFO", img: imgFileInfo }
-    const box5 = { id: 'box5', ref: useRef(null), name: "INFO-VEH", img: imgVehicle }
-    const box6 = { id: 'box6', ref: useRef(null), name: "DIALOG-WINDOW" }
-    const box7 = { id: 'box7', ref: useRef(null), name: "ANCHOR-METEO", img: imgVehicle }
-    const box8 = { id: 'box8', ref: useRef(null), name: "ANCHOR-CODEQ", img: imgVehicle }
+    const boxMDV = {id: 'boxMDV', ref: useRef(null), name: "MDV", img: imgMoveOut};
+    const boxCODEQ = {id: 'boxCODEQ', ref: useRef(null), name: "CODEQ", img: imgFeelings};
+    const boxMETEO = {id: 'boxMETEO', ref: useRef(null), name: "METEO", img: imgWeather}
+    const boxEntities = {id: 'boxEntities', ref: useRef(null), name: "FILE-INFO", img: imgFileInfo}
+    const boxDataVeh = {id: 'boxDataVeh', ref: useRef(null), name: "INFO-VEH", img: imgVehicle}
+    const boxDIALOG_WINDOW = {id: 'boxDIALOG_WINDOW', ref: useRef(null), name: "DIALOG-WINDOW"}
+    const boxANCHOR_METEO = {id: 'boxANCHOR_METEO', ref: useRef(null), name: "ANCHOR-METEO", img: imgVehicle}
+    const boxANCHOR_CODEQ = {id: 'boxANCHOR_CODEQ', ref: useRef(null), name: "ANCHOR-CODEQ", img: imgVehicle}
 
     // CurrentRecognition
     const [currentRecognition, setCurrentRecognition] = useState(["...\n"]);
@@ -73,88 +76,91 @@ function CockpitGrid() {
     const [isAudioOpen, setIsAudioOpen] = useState(false);
 
     // INFO
-    const [currentAddressCockpit, setCurrentAddressCockpit] = useState('Adresse non définie');
-    const [currentImmatCockpit, setCurrentImmatCockpit] = useState('Immat non définie');
-    const [currentMDVCockpit, setCurrentMDVCockpit] = useState('MDV non défini');
-    const [currentSentimentCockpit, setCurrentSentimentCockpit] = useState('Sentiment non défini');
+    const [currentAddressCockpit, setCurrentAddressCockpit] = useState('');
+    const [currentImmatCockpit, setCurrentImmatCockpit] = useState('');
+    const [currentMDVCockpit, setCurrentMDVCockpit] = useState('');
+    const [currentSentimentCockpit, setCurrentSentimentCockpit] = useState('');
+    const [currentConducteurCockpit, setCurrentConducteurCockpitt] = useState('');
+    const [currentAssureurCockpit, setCurrentAssureurCockpit] = useState('');
+    const [currentTiresCockpit, setCurrentTiresCockpit] = useState('');
 
 
     const [lines] = useState([
         {
-            start: 'box6',
-            end: 'box4',
+            start: 'boxDIALOG_WINDOW',
+            end: 'boxEntities',
             color: 'red',
             headSize: 2,
             strokeWidth: 6,
-            dashness: { animation: .05 },
+            dashness: {animation: .05},
         },
         {
-            start: 'box4',
-            end: 'box3',
+            start: 'boxEntities',
+            end: 'boxMETEO',
             color: 'red',
             headSize: 2,
             strokeWidth: 6,
-            dashness: { animation: 0.3 },
+            dashness: {animation: 0.3},
         },
         {
-            start: 'box4',
-            end: 'box5',
+            start: 'boxEntities',
+            end: 'boxDataVeh',
             color: 'red',
             headSize: 2,
             strokeWidth: 6,
-            dashness: { animation: 0.3 },
+            dashness: {animation: 0.3},
         },
         {
-            start: 'box6',
-            end: 'box7',
+            start: 'boxDIALOG_WINDOW',
+            end: 'boxANCHOR_METEO',
             color: 'red',
             strokeWidth: 6,
-            dashness: { animation: 0.3 },
+            dashness: {animation: 0.3},
             path: "smooth",
             startAnchor: ["left"],
             endAnchor: ["bottom"],
             headSize: 0
         },
         {
-            start: 'box7',
-            end: 'box1',
+            start: 'boxANCHOR_METEO',
+            end: 'boxMDV',
             color: 'red',
             headSize: 2,
             strokeWidth: 6,
-            dashness: { animation: 0.3 },
+            dashness: {animation: 0.3},
             path: "smooth",
             startAnchor: ["bottom"],
             endAnchor: ["left"],
         },
         {
-            start: 'box6',
-            end: 'box8',
+            start: 'boxDIALOG_WINDOW',
+            end: 'boxANCHOR_CODEQ',
             color: 'red',
             strokeWidth: 6,
-            dashness: { animation: 0.3 },
+            dashness: {animation: 0.3},
             path: "smooth",
             startAnchor: ["right"],
             endAnchor: ["bottom"],
             headSize: 0
         },
         {
-            start: 'box8',
-            end: 'box2',
+            start: 'boxANCHOR_CODEQ',
+            end: 'boxCODEQ',
             color: 'red',
             headSize: 2,
             strokeWidth: 6,
-            dashness: { animation: 0.3 },
+            dashness: {animation: 0.3},
             path: "smooth",
             startAnchor: ["bottom"],
             endAnchor: ["right"],
         },
         {
-            start: 'box6',
-            end: 'box2',
+            start: 'boxDIALOG_WINDOW',
+            end: 'boxCODEQ',
             color: 'red',
             headSize: 2,
             strokeWidth: 6,
-            dashness: { animation: 0.3 },
+            dashness: {animation: 0.3},
             startAnchor: {
                 position: "right"
             },
@@ -164,12 +170,12 @@ function CockpitGrid() {
             curveness: 20
         },
         {
-            start: 'box6',
-            end: 'box4',
+            start: 'boxDIALOG_WINDOW',
+            end: 'boxEntities',
             color: 'orange',
             headSize: 2,
             strokeWidth: 6,
-            dashness: { animation: 0.3 },
+            dashness: {animation: 0.3},
             startAnchor: ["top"],
             endAnchor: ["bottom"],
             path: "straight",
@@ -198,40 +204,44 @@ function CockpitGrid() {
                     hanlerIsAudioOpen={setIsAudioOpen}
                 />}
 
-                {startCoundown && <Countdown hoursMinSecs={hoursMinSecs} countdownType="sec" />}
+                {startCoundown && <Countdown hoursMinSecs={hoursMinSecs} countdownType="sec"/>}
 
                 {showMainWindow &&
-                    <section className={"cockpit-grid" + duringPopUp} id="canvas">
-                        <Box box={box1}
-                            mdv={currentMDVCockpit}
-                        />
-                        <Box box={box2}
-                            sentiment={currentSentimentCockpit} />
-                        <Box box={box3}
-                        />
-                        {/* FILE INFO */}
-                        <Box box={box4}
-                            address={currentAddressCockpit}
-                            immat={currentImmatCockpit} />
+                <section className={"cockpit-grid" + duringPopUp} id="canvas">
+                    <Box box={boxMDV}
+                         mdv={currentMDVCockpit}
+                    />
+                    <Box box={boxCODEQ}
+                         sentiment={currentSentimentCockpit}/>
+                    <Box box={boxMETEO}
+                    />
+                    {/* FILE INFO */}
+                    <Box box={boxEntities}
+                         address={currentAddressCockpit}
+                    />
 
-                        <Box box={box5} />
-                        <MainBox box={box6}
-                            currentRecognition={currentRecognition}
-                            historyRecognition={historyRecognition}
-                        />
-                        <Box box={box7} />
-                        <Box box={box8} />
+                    <Box box={boxDataVeh}
+                         immat={currentImmatCockpit}
+                         conducteur={currentConducteurCockpit}
+                         assureur={currentAssureurCockpit}
+                         tires={currentTiresCockpit}/>
+                    <MainBox box={boxDIALOG_WINDOW}
+                             currentRecognition={currentRecognition}
+                             historyRecognition={historyRecognition}
+                    />
+                    <Box box={boxANCHOR_METEO}/>
+                    <Box box={boxANCHOR_CODEQ}/>
 
-                        <div className={duringPopUp}>
-                            <Xarrow {...lines[0]} />
-                            <Xarrow {...lines[1]} />
-                            <Xarrow {...lines[2]} />
-                            <Xarrow {...lines[3]} />
-                            <Xarrow {...lines[4]} />
-                            <Xarrow {...lines[5]} />
-                            <Xarrow {...lines[6]} />
-                        </div>
-                    </section>
+                    <div className={duringPopUp}>
+                        <Xarrow {...lines[0]} />
+                        <Xarrow {...lines[1]} />
+                        <Xarrow {...lines[2]} />
+                        <Xarrow {...lines[3]} />
+                        <Xarrow {...lines[4]} />
+                        <Xarrow {...lines[5]} />
+                        <Xarrow {...lines[6]} />
+                    </div>
+                </section>
                 }
 
                 <div className="content-flex content-flex__justify-center">
@@ -243,6 +253,9 @@ function CockpitGrid() {
                         currentImmatCockpit={setCurrentImmatCockpit}
                         currentMDVCockpit={setCurrentMDVCockpit}
                         currentSentimentCockpit={setCurrentSentimentCockpit}
+                        currentConducteurCockpit={setCurrentConducteurCockpitt}
+                        currentAssureurCockpit={setCurrentAssureurCockpit}
+                        currentTiresCockpit={setCurrentTiresCockpit}
                     />
                 </div>
 
