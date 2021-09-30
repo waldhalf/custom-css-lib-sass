@@ -128,6 +128,34 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
         const url = encodeURI(
             `${document.location.protocol}://${location}/closechannel?showroom=showroom`
         );
+    axios.post(url, { method: "POST" }).then((r) => console.log(r.status));
+    connection?.close();
+    setConnection(undefined);
+  };
+
+  useEffect(() => {
+    if (props.isAudioOpen && !connection) {
+      connect();
+    }
+    if (!props.isAudioOpen && connection) {
+      disconnect();
+    }
+  }, [props.isAudioOpen]);
+
+  useEffect(() => {
+    if (connection) {
+      const audioContext = new window.AudioContext({ sampleRate });
+      const stream = Promise.all([
+        loadPCMWorker(audioContext),
+        getMediaStream(),
+      ]).then(([_, stream]) => {
+        captureAudio(audioContext, stream, (data) => connection.send(data));
+        return stream;
+      });
+      return () => {
+        stream.then((stream) =>
+          stream.getTracks().forEach((track) => track.stop())
+        );
         audioContext.close();
       };
     }
