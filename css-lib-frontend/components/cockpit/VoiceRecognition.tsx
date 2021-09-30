@@ -3,8 +3,8 @@ import React, { Fragment, useEffect, useState } from "react";
 
 // THIRD PARTY
 import axios from "axios";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPhoneSlash} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
 
 // HELPERS
 import {
@@ -15,8 +15,7 @@ import {
   CODEQ_SENTIMENT,
   SET_LIVE_ENTITIES,
 } from "../../helpers/constants";
-import {makeid} from "../../helpers/randomid"
-
+import { makeid } from "../../helpers/randomid";
 
 const sampleRate = 16000;
 
@@ -50,19 +49,19 @@ const captureAudio = (
 };
 
 interface Props {
-    props: any;
-    currentRecognitionCockpit: (data) => void;
-    historyRecognitionCockpit: (data) => void;
-    currentConducteurCockpit: (data) => void;
-    currentTiresCockpit: (data) => void;
-    currentAssureurCockpit: (data) => void;
-    currentAddressCockpit: (data) => void;
-    currentImmatCockpit: (data) => void;
-    currentMDVCockpit: (data) => void;
-    currentSentimentCockpit: (data) => void;
-    currentIncidentCockpit: (data) => void;
-    isAudioOpen: boolean;
-    buttonType: string;
+  props: any;
+  currentRecognitionCockpit: (data) => void;
+  historyRecognitionCockpit: (data) => void;
+  currentConducteurCockpit: (data) => void;
+  currentTiresCockpit: (data) => void;
+  currentAssureurCockpit: (data) => void;
+  currentAddressCockpit: (data) => void;
+  currentImmatCockpit: (data) => void;
+  currentMDVCockpit: (data) => void;
+  currentSentimentCockpit: (data) => void;
+  currentIncidentCockpit: (data) => void;
+  isAudioOpen: boolean;
+  buttonType: string;
 }
 
 const VoiceStreamer: React.FC<Props> = (props: Props) => {
@@ -72,7 +71,6 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     []
   );
   const [showStop, setShowStop] = useState(false);
-
   const speechRecognized = (data) => {
     if (data?.type === SET_LIVE_TRANSCRIPT) {
       setCurrentRecognition("...");
@@ -85,19 +83,22 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
       if (data.type === ADDRESS) {
         props.currentAddressCockpit(data.name);
       }
+      if (data.type.startsWith("VEH")) {
+        props.currentIncidentCockpit(data.name);
+      }
+      if (data.type === CODEQ_SENTIMENT) {
+        console.log(data.name[0]?.sentiments[0]);
+        props.currentSentimentCockpit(data.name[0]?.sentiments[0]);
+      }
+      if (data.type === MDV) {
+        props.currentMDVCockpit(data.name);
+      }
     }
     if (data.type === SET_VEHICULE) {
       props.currentImmatCockpit(data.immatriculation);
       props.currentConducteurCockpit(data.conducteur);
       props.currentAssureurCockpit(data.assureur);
       props.currentTiresCockpit(data.tires);
-    }
-    if (data.data?.type === MDV) {
-      props.currentMDVCockpit(data.data.name);
-    }
-    if (data.data?.type === CODEQ_SENTIMENT) {
-      console.log(data.data?.name[0]?.sentiments[0]);
-      props.currentSentimentCockpit(data.data?.name[0]?.sentiments[0]);
     }
   };
 
@@ -107,138 +108,88 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     connection?.close();
     let isDevelopment = true;
     if (process.env.NODE_ENV === "production") isDevelopment = false;
-    // const location = isDevelopment ? "localhost:8080" : document.location.host;
+    let showroom = "showroom" + (isDevelopment ? "DEV" : "") + makeid(5);
+    localStorage.setItem("showroom", showroom);
+    showroom = localStorage.getItem("showroom");
     const location = isDevelopment
-      ? "localhost:8080"
+      ? "imalab-showroom-backend.herokuapp.com"
       : "imalab-showroom-backend.herokuapp.com";
     const url = encodeURI(
       `${document.location.protocol.replace(
         "http",
         "ws"
-      )}//${location}/v1/ws/stt?numcharge=12345&showroom=showroomdev`
+      )}//${location}/v1/ws/stt?numcharge=12345&showroom=${showroom}`
     );
-    const [showStop, setShowStop] = useState(false);
 
-    const speechRecognized = (data) => {
-        if (data?.type === SET_LIVE_TRANSCRIPT) {
-            setCurrentRecognition("...");
-            setRecognitionHistory((old) => [data.transcript, ...old]);
-            props.currentRecognitionCockpit(data.transcript);
-            props.historyRecognitionCockpit((old) => [data.transcript, ...old]);
-        }
-        if (data.type === SET_LIVE_ENTITIES) {
-            data = data.data;
-            if (data.type === ADDRESS) {
-                props.currentAddressCockpit(data.name);
-            }
-            if (data.type.startsWith("VEH")) {
-                props.currentIncidentCockpit(data.name);
-            }
-            if (data.type === CODEQ_SENTIMENT) {
-                console.log(data.name[0]?.sentiments[0]);
-                props.currentSentimentCockpit(data.name[0]?.sentiments[0]);
-            }
-            if (data.type === MDV) {
-                props.currentMDVCockpit(data.name);
-            }
-        }
-        if (data.type === SET_VEHICULE) {
-            props.currentImmatCockpit(data.immatriculation);
-            props.currentConducteurCockpit(data.conducteur);
-            props.currentAssureurCockpit(data.assureur);
-            props.currentTiresCockpit(data.tires);
-        }
+    const conn = new WebSocket(url);
+    conn.onmessage = (event) => speechRecognized(JSON.parse(event.data));
+    setConnection(conn);
+  };
 
-    };
+  const disconnect = () => {
+    let isDevelopment = true;
+    if (process.env.NODE_ENV === "production") isDevelopment = false;
+    let showroom = localStorage.getItem("showroom");
+    const location = isDevelopment
+      ? "localhost:8080"
+      : "imalab-showroom-backend.herokuapp.com";
+    const url = encodeURI(
+      `${document.location.protocol}//${location}/closechannel?showroom=${showroom}`
+    );
+    axios.post(url, { method: "POST" }).then((r) => console.log(r.status));
+    connection?.close();
+    setConnection(undefined);
+  };
 
-    const connect = () => {
-        console.log("connecting");
-        setShowStop(true);
-        connection?.close();
-        let isDevelopment = true;
-        if (process.env.NODE_ENV === "production") isDevelopment = false;
-        let showroom = "showroom" + (isDevelopment ? "DEV" : "") + makeid(5)
-        localStorage.setItem("showroom", showroom);
-        showroom = localStorage.getItem("showroom")
-        const location = isDevelopment
-            ? "localhost:8080"
-            : "imalab-showroom-backend.herokuapp.com";
-        const url = encodeURI(
-            `${document.location.protocol.replace(
-                "http",
-                "ws"
-            )}//${location}/v1/ws/stt?numcharge=12345&showroom=${showroom}`
+  useEffect(() => {
+    if (props.isAudioOpen && !connection) {
+      connect();
+    }
+    if (!props.isAudioOpen && connection) {
+      disconnect();
+    }
+  }, [props.isAudioOpen]);
+
+  useEffect(() => {
+    if (connection) {
+      const audioContext = new window.AudioContext({ sampleRate });
+      const stream = Promise.all([
+        loadPCMWorker(audioContext),
+        getMediaStream(),
+      ]).then(([_, stream]) => {
+        captureAudio(audioContext, stream, (data) => connection.send(data));
+        return stream;
+      });
+      return () => {
+        stream.then((stream) =>
+          stream.getTracks().forEach((track) => track.stop())
         );
+        audioContext.close();
+      };
+    }
+  }, [connection]);
 
-        const conn = new WebSocket(url);
-        conn.onmessage = (event) => speechRecognized(JSON.parse(event.data));
-        setConnection(conn);
-    };
-
-    const disconnect = () => {
-        let isDevelopment = true;
-        if (process.env.NODE_ENV === "production") isDevelopment = false;
-        let showroom = localStorage.getItem("showroom")
-        const location = isDevelopment
-            ? "localhost:8080"
-            : "imalab-showroom-backend.herokuapp.com";
-        const url = encodeURI(
-            `${document.location.protocol}//${location}/closechannel?showroom=${showroom}`
-        );
-        axios.post(url, {method: "POST"}).then((r) => console.log(r.status));
-        connection?.close();
-        setConnection(undefined);
-    };
-
-    useEffect(() => {
-        if (props.isAudioOpen && !connection) {
-            connect();
-        }
-        if (!props.isAudioOpen && connection) {
-            disconnect();
-        }
-    }, [props.isAudioOpen]);
-
-    useEffect(() => {
-        if (connection) {
-            const audioContext = new window.AudioContext({sampleRate});
-            const stream = Promise.all([
-                loadPCMWorker(audioContext),
-                getMediaStream(),
-            ]).then(([_, stream]) => {
-                captureAudio(audioContext, stream, (data) => connection.send(data));
-                return stream;
-            });
-            return () => {
-                stream.then((stream) =>
-                    stream.getTracks().forEach((track) => track.stop())
-                );
-                audioContext.close();
-            };
-        }
-    }, [connection]);
-
-    return (
-        <Fragment>
-            {props.buttonType === "start" && (
-                <button className='popup__button' onClick={connect}>
-                    Commencer !
-                </button>
-            )}
-            {showStop && (
-                // <button className='popup__button' onClick={disconnect}>
-                //   Stop
-                // </button>
-                <div className='cockpit__button-stop'>
-                    <button
-                        className='btn__fun-button btn__fun-button--first'
-                        onClick={disconnect}
-                    >
-                        <FontAwesomeIcon icon={faPhoneSlash}/>
-                    </button>
-                </div>
-            )}
-            {/* <h2>{currentRecognition}</h2>
+  return (
+    <Fragment>
+      {props.buttonType === "start" && (
+        <button className='popup__button' onClick={connect}>
+          Commencer !
+        </button>
+      )}
+      {showStop && (
+        // <button className='popup__button' onClick={disconnect}>
+        //   Stop
+        // </button>
+        <div className='cockpit__button-stop'>
+          <button
+            className='btn__fun-button btn__fun-button--first'
+            onClick={disconnect}
+          >
+            <FontAwesomeIcon icon={faPhoneSlash} />
+          </button>
+        </div>
+      )}
+      {/* <h2>{currentRecognition}</h2>
       {recognitionHistory.map((tx, idx) => (
         <h2 key={idx}>{tx}</h2>
       ))} */}
