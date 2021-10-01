@@ -10057,7 +10057,8 @@
       document
         .getElementById("messageBazard")
         .classList.remove("messageBazardTransparent");
-
+      
+      
       document
         .getElementById("messageBazard")
         .classList.add("messageBazardVisible");

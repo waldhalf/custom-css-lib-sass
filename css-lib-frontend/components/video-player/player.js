@@ -32,18 +32,23 @@ function VideoPlayer(props) {
                     playing={videoPlay}
                 />
             </div>
-            <div className="content-flex content-flex__justify-center mt-10">
-                <button className="video-player__button video-player__button--play" onClick={playVideo}></button>
-                <div className="mr-15 ml-15"></div>
-                <button className="video-player__button video-player__button--pause" onClick={pauseVideo}></button>
+            <div className="video-player__buttons-container">
+
+                <div className="content-flex content-flex__justify-between mt-10">
+                    <div className="content-flex">
+                        <button className="video-player__button video-player__button--play" onClick={playVideo}></button>
+                        <div className="mr-15 ml-15"></div>
+                        <button className="video-player__button video-player__button--pause" onClick={pauseVideo}></button>
+                    </div>
+
+                    <Link href="/cockpit">
+                        <a className="video-player__button-next--simple-hover video-player__button-next content-flex content-flex__justify-around video-player__button-text">
+                            Appeler l&apos;assistance
+                        </a>
+                    </Link>
+                </div>
             </div>
-            <div className="content-flex content-flex__justify-end">
-                <Link href="/cockpit">
-                    <a className="video-player__button-next--simple-hover video-player__button-next content-flex content-flex__justify-around">
-                        <FontAwesomeIcon icon={faPhone} /> IMA
-                    </a>
-                </Link>
-            </div>
+
 
         </Fragment >)
 }

@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 // NEXT JS
 import dynamic from "next/dynamic";
 import Head from 'next/head';
+import UberduckComponent from '../../components/uberduck/index.js';
 
 // OWN
 const Header = dynamic(() => import('../../components/layout/Header.js'), {
@@ -18,7 +19,7 @@ function Uberduck() {
         </Head>
         <div className="container">
             <Header title="Uberduck" subtitle="Laissez l'IA vous parler..." />
-            <div>UBERDUCK</div>
+            <UberduckComponent />
         </div>
     </Fragment>)
 }

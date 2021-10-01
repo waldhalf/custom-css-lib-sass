@@ -285,6 +285,7 @@ body {
 
 .panel.panel-blue {
   box-shadow: 0px 0px 25px 5px #f2f2f2;
+  margin-top: 4rem;
   /* border: 1px solid #8241e1; */
   /* background-color: #f0ebfa; */
   /* color: #0087FF; */
@@ -361,11 +362,12 @@ body {
 .btn-right {
   background: none;
   border: 0;
-  font-size: 20px;
+  /* font-size: 20px; */
   line-height: 2em;
   position: relative;
-  width: 18em;
+  width: 20em;
   height: 4em;
+  margin-right: 10px;
 }
 
 .btn-right a {
@@ -607,7 +609,7 @@ body {
 }
 
 .gestureDflex {
-  height: 70vh;
+  height: 40vh;
 }
 
 #divpasserSecondExercice {
@@ -685,7 +687,7 @@ body {
   align-items: center;
   background-color: #1897c0;
   box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+    -8px -8px 12px 0 rgba(160, 142, 142, 0.3);
   border-radius: 50px;
   display: flex;
   /* height: auto; */
@@ -700,6 +702,14 @@ body {
   margin-right: 10px;
   margin-bottom: 10px;
   opacity: 0.2;
+}
+
+.check-emoji {
+  font-size: 150px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
 }
 
 .gesture-emoji.active {

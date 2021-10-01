@@ -20,7 +20,7 @@ body.handsfree-started.handsfree-hide-debug .handsfree-hide-when-not-debugging {
   position: absolute;
   top: 0;
   left: 0;
-  width: 400px;
+  width: 250px;
 }
 .handsfree-canvas,
 .handsfree-video {
