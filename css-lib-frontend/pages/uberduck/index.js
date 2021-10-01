@@ -3,27 +3,24 @@ import { Fragment } from 'react';
 
 // NEXT JS
 import dynamic from "next/dynamic";
-import Head from "next/head";
+import Head from 'next/head';
+
 // OWN
 const Header = dynamic(() => import('../../components/layout/Header.js'), {
     ssr: false,
 });
-
-import CockpitGrid from '../../components/cockpit/CockpitGrid.js';
-
-
-function Cockpit() {
+function Uberduck() {
     return (<Fragment>
         <Head>
-            <title>Cockpit</title>
+            <title>Uberduck</title>
             <meta name="description" content="Ce qui l'IA peut appoter au chargé d'assistance" />
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="container">
-            <Header title="Cockpit" subtitle="La voix digitale" />
-            <CockpitGrid />
+            <Header title="Uberduck" subtitle="Laissez l'IA vous parler..." />
+            <div>UBERDUCK</div>
         </div>
     </Fragment>)
 }
 
-export default Cockpit;
+export default Uberduck;

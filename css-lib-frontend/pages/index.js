@@ -1,11 +1,8 @@
 // REACT
 import { Fragment } from 'react';
 
-import Head from 'next/head'
-import Link from 'next/link';
-import styles from '../styles/Home.module.scss';
-
 // NEXT
+import Head from 'next/head';
 import dynamic from "next/dynamic";
 
 // OWN

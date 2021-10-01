@@ -43,6 +43,10 @@
         margin-bottom: rem(5);
       }
     }
+
+    &__title {
+      margin: 0;
+    }
     &__header {
       text-transform: uppercase;
       font-size: rem(20);
