@@ -4,7 +4,6 @@ function CockpitDialogWindow(props) {
     const { name, historyRecognition } = props
     const cssClassName = `cockpit__${name}`.toLowerCase();
 
-    const textArea = useRef();
     const text = historyRecognition.reverse().join('\n').trim();
     // let textInverse = "";
     // var startingIndex = historyRecognition.length - 1;
@@ -26,7 +25,6 @@ function CockpitDialogWindow(props) {
             cols="30"
             rows="2"
             readOnly
-            ref={textArea}
         ></textarea>
     </div>)
 }

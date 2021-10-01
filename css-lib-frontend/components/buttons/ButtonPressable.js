@@ -2,11 +2,10 @@ import { useRef } from 'react';
 
 
 
-function ButtonPressable() {
-
+function ButtonPressable(props) {
 
     return (<div className="btn__pressable--blue">
-        <button>Commencer</button>
+        <button>{props.text}</button>
     </div>)
 }
 

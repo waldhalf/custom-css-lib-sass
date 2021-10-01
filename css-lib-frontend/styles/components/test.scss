@@ -1,1 +1,81 @@
 @use '../util' as *;
+
+$margin-line: #941c5a;
+$lines: #1d97b8;
+
+.paper {
+  width: 450px;
+  height: 600px;
+  background-color: #fff;
+  background-image: linear-gradient($lines 0.05em, transparent 0.05em);
+  background-size: 100% 2em;
+  position: relative;
+  box-shadow: 15px 15px 33px rgba(27, 27, 27, 0.1);
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+  }
+
+  &:before {
+    height: 100%;
+    width: 2px;
+    background-color: $margin-line;
+    left: 4em;
+    z-index: 2;
+  }
+
+  &:after {
+    height: 6em;
+    width: 100%;
+    background-color: #fff;
+    left: 0;
+    z-index: 1;
+  }
+
+  .holes {
+    background-color: #eee;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: block;
+    z-index: 10;
+    margin-left: 1em;
+    margin-top: 6em;
+
+    &:before,
+    &:after {
+      content: "";
+      width: 35px;
+      height: 35px;
+      background-color: #eee;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    &:before {
+      top: 6em;
+    }
+
+    &:after {
+      top: calc(100% - 6em);
+    }
+  }
+  &__textarea {
+    position: absolute;
+    top: 6rem;
+    left: 4rem;
+    width: calc(100% - 5rem);
+    height: calc(100% - 7rem);
+    background-color: transparent;
+    border: none;
+    font-family: "Dancing Script";
+    font-size: 2rem;
+    line-height: 1;
+    padding-left: 1rem;
+    margin: 0;
+    resize: none;
+  }
+}
