@@ -66,17 +66,12 @@ interface Props {
 
 const VoiceStreamer: React.FC<Props> = (props: Props) => {
   const [connection, setConnection] = useState<WebSocket>();
-  const [currentRecognition, setCurrentRecognition] = useState<string>("");
-  const [recognitionHistory, setRecognitionHistory] = useState<Array<string>>(
-    []
-  );
+
   const [showStop, setShowStop] = useState(false);
   const speechRecognized = (data) => {
     if (data?.type === SET_LIVE_TRANSCRIPT) {
-      setCurrentRecognition("...");
-      setRecognitionHistory((old) => [data.transcript, ...old]);
       props.currentRecognitionCockpit(data.transcript);
-      props.historyRecognitionCockpit((old) => [data.transcript, ...old]);
+      props.historyRecognitionCockpit((old) => [...old, data.transcript]);
     }
     if (data.type === SET_LIVE_ENTITIES) {
       data = data.data;
