@@ -1,3 +1,7 @@
+var ma_custom_config = {
+  'insideModal': true,
+};
+
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined"
     ? (module.exports = factory())
@@ -10048,7 +10052,6 @@
 
   const overflowing_cabinet = () => {
     return wait(1000).then(() => {
-      console.log("c'est oyui");
       document
         .getElementById("deskcase")
         .setAttribute("src", "./img/fulldrawer.png");
@@ -10163,10 +10166,15 @@
                   document.getElementById("monInput").value = "";
                 } else if ($potTarget.id === "BpasserSecondExercice") {
                   document.getElementById("divpasserSecondExercice").click();
+                }  else if ($potTarget.id === "BpasserTroisiemeExercice") {
+                  document.getElementById("passerTroisiemeExercice").click();
                 }
                 varCacheCopy = "";
               }
               if ($potTarget.nodeName === "P") {
+                if ($potTarget.id === "PpasserSecondExercice") {
+                  document.getElementById("divpasserSecondExercice").click();
+                }
                 if ($potTarget.id === "PpasserSecondExercice") {
                   document.getElementById("divpasserSecondExercice").click();
                 }
@@ -10265,14 +10273,14 @@
                           .setAttribute("src", "./img/final2case.png");
                         varCacheCopy = "";
                         break;
-                      case 3:
-                        document
-                          .getElementById("deskcase")
-                          .setAttribute("src", "./img/final3case.png");
-                        varCacheCopy = "";
-                        break;
+                      // case 3:
+                      //   document
+                      //     .getElementById("deskcase")
+                      //     .setAttribute("src", "./img/final3case.png");
+                      //   varCacheCopy = "";
+                      //   break;
 
-                      case 4:
+                      case 3:
                         myFuncAnimation();
                         document.getElementById("messageBazard").style.display =
                           "inline";
@@ -11215,6 +11223,8 @@
         });
 
         if (++this.numModelsLoaded === numActiveModels) {
+          console.log("impression de mon document.body : ", document.body);
+          // handsfree-show-debug handsfree-model-hands modal-open handsfree-started
           document.body.classList.remove("handsfree-loading");
           document.body.classList.add("handsfree-started");
           this.hasAddedBodyClass = true;
@@ -11944,12 +11954,29 @@
      * Sets up the video and canvas elements
      */
 
+
+
     setupDebugger() {
       this.debug = {}; // debugger wrap
 
       if (!this.config.setup.wrap.$el) {
         const $wrap = document.createElement("DIV");
+        // var elem = document.createElement("img");
+        // elem.setAttribute("src", "https://image.shutterstock.com/image-photo/kiev-ukraine-may-30-2016-260nw-428643526.jpg");
+        // console.log(" ===>>> ", ma_custom_config)
+        
+        // if (ma_custom_config['insideModal'] == true){
+        //   // mettre dans la partie de la modale
+        //   // $wrap.classList.add("handsfree-debugger-insidemodal");
+        //   console.log("dans le if");
+          
+        //   document.getElementById('debuggerDansModal').className += " handsfree-debugger-insidemodal";
+        // } else {
+        //   console.log("dans le else");
+        //   $wrap.classList.add("handsfree-debugger");
+        // }
         $wrap.classList.add("handsfree-debugger");
+
         this.config.setup.wrap.$el = $wrap;
       }
 
@@ -12013,7 +12040,6 @@
       ); // Append everything to the body
 
       this.config.setup.wrap.$parent.appendChild(this.debug.$wrap); // Add classes
-
       if (this.config.showDebug) {
         this.showDebugger();
       } else {
@@ -12026,6 +12052,7 @@
 
     showDebugger() {
       this.isDebugging = true;
+      console.log("dans le showDebugger4: ", ma_custom_config)
       document.body.classList.add("handsfree-show-debug");
       document.body.classList.remove("handsfree-hide-debug");
     }

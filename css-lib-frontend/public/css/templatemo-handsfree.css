@@ -20,6 +20,7 @@
 /* exercice card */
 #exerciceCard,
 /* #messageCopierColler, */
+#divpasserFullScreen,
 #divpasserSecondExercice,
 /* exercice dossier */
 #exerciceDossier,
@@ -250,7 +251,8 @@
 }
 
 body {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
+  overflow: hidden;
   max-width: 100%;
 }
 
@@ -610,6 +612,13 @@ body {
 
 .gestureDflex {
   height: 40vh;
+}
+
+#divpasserFullScreen {
+  position: fixed;
+  bottom: 40px;
+  right: 60px;
+  z-index: 1;
 }
 
 #divpasserSecondExercice {

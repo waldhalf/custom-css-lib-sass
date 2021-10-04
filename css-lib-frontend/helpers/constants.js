@@ -4,4 +4,5 @@ export const SET_LIVE_ENTITIES = 'SET_LIVE_ENTITIES';
 export const ADDRESS = 'ADDRESS';
 export const MDV = 'MDV'
 export const CODEQ_SENTIMENT = 'CODEQ_SENTIMENT'
+export const SET_LIVE_TRADUCTION = "SET_LIVE_TRADUCTION";
 
