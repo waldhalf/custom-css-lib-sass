@@ -88,11 +88,11 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     if (data?.type === SET_LIVE_TRANSCRIPT) {
       setCurrentRecognition(data.transcript);
       setRecognitionHistory((old) => [data.transcript, ...old]);
-      props.customerSpeech((old) => [data.transcript, ...old]);
+      props.customerSpeech((old) => [...old, data.transcript]);
     }
     if (data.type === SET_LIVE_TRADUCTION) {
-      const myText = data.text.replace("&#39;", "'");
-      props.customerSpeechEn((old) => [myText, ...old]);
+      const myText = data.text.replaceAll("&#39;", "'");
+      props.customerSpeechEn((old) => [...old, myText]);
       console.log("____current recognition____");
       console.log(myText);
       getVoice(myText);
