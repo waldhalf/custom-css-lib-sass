@@ -64,7 +64,7 @@ function getVoice(myPhrase) {
     ? "imalab-showroom-backend.herokuapp.com"
     : "imalab-showroom-backend.herokuapp.com";
   const url = encodeURI(
-    `${document.location.protocol}//${location}/uberduck-ai`
+    `${document.location.protocol}//${location}/uberducai`
   );
   axios
     .post(url, {
