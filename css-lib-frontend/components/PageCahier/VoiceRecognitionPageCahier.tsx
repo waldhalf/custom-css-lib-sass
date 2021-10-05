@@ -59,7 +59,7 @@ function getVoice(myPhrase) {
     const data = {phrase: myPhrase}
     if (process.env.NODE_ENV === "production") isDevelopment = false;
     const location = isDevelopment
-        ? "localhost:8080"
+        ? "imalab-showroom-backend.herokuapp.com"
         : "imalab-showroom-backend.herokuapp.com";
     const url = encodeURI(
         `${document.location.protocol}//${location}/uberduckai`
@@ -150,7 +150,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     if (process.env.NODE_ENV === "production") isDevelopment = false;
     let showroom = localStorage.getItem("showroom");
     const location = isDevelopment
-      ? "localhost:8080"
+      ? "imalab-showroom-backend.herokuapp.com"
       : "imalab-showroom-backend.herokuapp.com";
     const url = encodeURI(
       `${document.location.protocol}//${location}/closechannel?showroom=${showroom}`
