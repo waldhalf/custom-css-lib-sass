@@ -65,12 +65,33 @@ function getVoice(myPhrase) {
         `${document.location.protocol}//${location}/uberduckai`
     );
 
-    axios
+    /* INIT NB WAV REQUEST */
+    let nbWavQuery = localStorage.getItem("nbWavQuery");
+    let nbWavTot = localStorage.getItem("nbWavTot");
+
+    if (nbWavQuery === null) nbWavQuery = '0';
+    if (nbWavTot === null) nbWavTot = '0';
+
+    nbWavQuery = (parseInt(nbWavQuery)+1).toString()
+    localStorage.setItem("nbWavQuery", nbWavQuery);
+
+  /* REQUEST WAV */
+  axios
         .post(url, data)
         .then((r) => {
-            let wavPaths = localStorage.getItem("wavepaths");
-            wavPaths += ","+ r.data.path
-            localStorage.setItem("wavepaths", wavPaths);
+          let wavPaths = localStorage.getItem("wavPaths");
+          if (wavPaths === null) {
+            let paths = [{src: r.data.path, type: 'audio/x-wav'}]
+            wavPaths = JSON.stringify(paths)
+          }
+          else {
+            let paths = [...JSON.parse(wavPaths), {src: r.data.path, type: 'audio/x-wav'}]
+            wavPaths = JSON.stringify(paths)
+          }
+
+          nbWavTot = (parseInt(nbWavTot)+1).toString()
+          localStorage.setItem("wavPaths", wavPaths);
+          localStorage.setItem("nbWavTot", nbWavTot);
         });
 }
 
@@ -98,6 +119,9 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
   };
 
   const connect = () => {
+    localStorage.removeItem("nbWavQuery")
+    localStorage.removeItem("nbWavTot")
+    localStorage.removeItem("wavPaths")
     console.log("connecting");
     setShowStop(true);
     connection?.close();
@@ -143,7 +167,15 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     setConnection(undefined);
     props.customerSpeech([""]);
     props.customerSpeechEn([""]);
-    setWavLaunch(true)
+
+    let nbWavQuery = localStorage.getItem("nbWavQuery");
+    let nbWavTot = localStorage.getItem("nbWavTot");
+    if(nbWavQuery === null || nbWavTot === null) return
+
+
+    setTimeout(function () {
+        setWavLaunch(true)
+    }, 7000);
   };
 
 
@@ -189,9 +221,9 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
         </div>
       )}
 
-      {wavLaunch && (
+      {wavLaunch &&  (
         <div id="TOTO">
-          <AudioPlayer audioArray={audioArray}/>
+          <AudioPlayer audioArray={JSON.parse(localStorage.getItem("wavPaths")).reverse()}/>
         </div>
       )}
     </Fragment>
