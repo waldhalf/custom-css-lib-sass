@@ -10,6 +10,7 @@ import {
   SET_LIVE_TRADUCTION,
 } from "../../helpers/constants";
 import { makeid } from "../../helpers/randomid";
+import AudioPlayer from "./AudioPlayer";
 
 const sampleRate = 16000;
 
@@ -58,7 +59,7 @@ function getVoice(myPhrase) {
     const data = {phrase: myPhrase}
     if (process.env.NODE_ENV === "production") isDevelopment = false;
     const location = isDevelopment
-        ? "imalab-showroom-backend.herokuapp.com"
+        ? "localhost:8080"
         : "imalab-showroom-backend.herokuapp.com";
     const url = encodeURI(
         `${document.location.protocol}//${location}/uberduckai`
@@ -66,7 +67,11 @@ function getVoice(myPhrase) {
 
     axios
         .post(url, data)
-        .then((r) => console.log(r));
+        .then((r) => {
+            let wavPaths = localStorage.getItem("wavepaths");
+            wavPaths += ","+ r.data.path
+            localStorage.setItem("wavepaths", wavPaths);
+        });
 }
 
 const VoiceStreamer: React.FC<Props> = (props: Props) => {
@@ -75,6 +80,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
   const [recognitionHistory, setRecognitionHistory] = useState<Array<string>>(
     []
   );
+  const [wavLaunch, setWavLaunch] = useState<boolean>(false);
   const [showStop, setShowStop] = useState(false);
   const speechRecognized = (data) => {
     if (data?.type === SET_LIVE_TRANSCRIPT) {
@@ -120,7 +126,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     if (process.env.NODE_ENV === "production") isDevelopment = false;
     let showroom = localStorage.getItem("showroom");
     const location = isDevelopment
-      ? "imalab-showroom-backend.herokuapp.com"
+      ? "localhost:8080"
       : "imalab-showroom-backend.herokuapp.com";
     const url = encodeURI(
       `${document.location.protocol}//${location}/closechannel?showroom=${showroom}`
@@ -137,7 +143,10 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     setConnection(undefined);
     props.customerSpeech([""]);
     props.customerSpeechEn([""]);
+    setWavLaunch(true)
   };
+
+
 
   useEffect(() => {
     if (props.isAudioOpen && !connection) {
@@ -179,8 +188,19 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
           <button onClick={disconnect}>Terminer</button>
         </div>
       )}
+
+      {wavLaunch && (
+        <div id="TOTO">
+          <AudioPlayer audioArray={audioArray}/>
+        </div>
+      )}
     </Fragment>
   );
 };
+
+
+const audioArray = [{src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/f84ce3e6-8706-4d46-8de3-84d1f5290bfb/audio.wav', type: 'audio/x-wav'},
+  {src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/9ab4c862-51e9-4828-bc8b-65e81861a3c6/audio.wav', type: 'audio/x-wav'},
+  {src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/f84ce3e6-8706-4d46-8de3-84d1f5290bfb/audio.wav', type: 'audio/x-wav'},]
 
 export default VoiceStreamer;
