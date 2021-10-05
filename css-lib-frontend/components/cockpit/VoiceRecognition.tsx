@@ -132,12 +132,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
       `${document.location.protocol}//${location}/closechannel?showroom=${showroom}`
     );
     axios
-      .post(url, {
-        method: "POST",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
+      .post(url)
       .then((r) => console.log(r.status));
     connection?.close();
     setConnection(undefined);

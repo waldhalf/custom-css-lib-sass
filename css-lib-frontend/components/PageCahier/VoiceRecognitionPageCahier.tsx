@@ -3,8 +3,6 @@ import React, { Fragment, useEffect, useState } from "react";
 
 // THIRD PARTY
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
 
 // HELPERS
 import {
@@ -56,25 +54,19 @@ interface Props {
 }
 
 function getVoice(myPhrase) {
-  let isDevelopment = true;
-  console.log("_______TEXTE_____");
-  console.log(myPhrase);
-  if (process.env.NODE_ENV === "production") isDevelopment = false;
-  const location = isDevelopment
-    ? "imalab-showroom-backend.herokuapp.com"
-    : "imalab-showroom-backend.herokuapp.com";
-  const url = encodeURI(
-    `${document.location.protocol}//${location}/uberducai`
-  );
-  axios
-    .post(url, {
-      method: "POST",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: { phrase: myPhrase },
-    })
-    .then((r) => console.log(r));
+    let isDevelopment = true;
+    const data = {phrase: myPhrase}
+    if (process.env.NODE_ENV === "production") isDevelopment = false;
+    const location = isDevelopment
+        ? "imalab-showroom-backend.herokuapp.com"
+        : "imalab-showroom-backend.herokuapp.com";
+    const url = encodeURI(
+        `${document.location.protocol}//${location}/uberduckai`
+    );
+
+    axios
+        .post(url, data)
+        .then((r) => console.log(r));
 }
 
 const VoiceStreamer: React.FC<Props> = (props: Props) => {
