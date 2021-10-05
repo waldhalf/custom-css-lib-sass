@@ -222,7 +222,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
       )}
 
       {wavLaunch &&  (
-        <div id="TOTO">
+        <div id="AudioPlayer">
           <AudioPlayer audioArray={JSON.parse(localStorage.getItem("wavPaths")).reverse()}/>
         </div>
       )}
@@ -231,8 +231,8 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
 };
 
 
-const audioArray = [{src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/f84ce3e6-8706-4d46-8de3-84d1f5290bfb/audio.wav', type: 'audio/x-wav'},
-  {src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/9ab4c862-51e9-4828-bc8b-65e81861a3c6/audio.wav', type: 'audio/x-wav'},
-  {src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/f84ce3e6-8706-4d46-8de3-84d1f5290bfb/audio.wav', type: 'audio/x-wav'},]
+// const audioArray = [{src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/f84ce3e6-8706-4d46-8de3-84d1f5290bfb/audio.wav', type: 'audio/x-wav'},
+//   {src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/9ab4c862-51e9-4828-bc8b-65e81861a3c6/audio.wav', type: 'audio/x-wav'},
+//   {src: 'https://uberduck-audio-outputs.s3-us-west-2.amazonaws.com/f84ce3e6-8706-4d46-8de3-84d1f5290bfb/audio.wav', type: 'audio/x-wav'},]
 
 export default VoiceStreamer;
