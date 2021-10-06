@@ -119,6 +119,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
   };
 
   const connect = () => {
+    setWavLaunch(false);
     localStorage.removeItem("nbWavQuery")
     localStorage.removeItem("nbWavTot")
     localStorage.removeItem("wavPaths")
@@ -167,18 +168,15 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     setConnection(undefined);
     props.customerSpeech([""]);
     props.customerSpeechEn([""]);
-      setWaitingMessage(true);
-    let nbWavQuery = localStorage.getItem("nbWavQuery");
-    let nbWavTot = localStorage.getItem("nbWavTot");
-    if(nbWavQuery === null || nbWavTot === null) return
-
+    setWaitingMessage(true);
+    // let nbWavQuery = localStorage.getItem("nbWavQuery");
+    // let nbWavTot = localStorage.getItem("nbWavTot");
+    // if(nbWavQuery === null || nbWavTot === null) return
 
     setTimeout(function () {
         setWavLaunch(true)
+        setWaitingMessage(false)
     }, 7000);
-    setTimeout(function () {
-      setWavLaunch(false)
-  }, 7000);
   };
 
 
