@@ -179,8 +179,6 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     }, 7000);
   };
 
-
-
   useEffect(() => {
     if (props.isAudioOpen && !connection) {
       connect();
@@ -211,27 +209,34 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
 
   return (
     <Fragment>
-      <div className="content-flex content-flex__justify-center first">
       {connection === undefined && (
+      <div className="content-flex content-flex__justify-center">
         <div className={props.cssClass}>
           <button onClick={connect}>Commencer</button>
         </div>
-      )}
-      {connection !== undefined && (
-        <div className={props.cssClass}>
-          <button onClick={disconnect}>Terminer</button>
-        </div>
-      )}
       </div>
+      )}
 
-      <div className="content-flex content-flex__justify-center second">
-      {waitingMessage && <div className="mt-75">Laissez-nous quelques secondes pour travailler avec votre voix...</div>}
+      {connection !== undefined && (
+        <div className="content-flex content-flex__justify-center">
+          <div className={props.cssClass}>
+            <button onClick={disconnect}>Terminer</button>
+          </div>
+      </div>
+      )}
+
+      {waitingMessage && 
+      <div className="content-flex content-flex__justify-center">
+        <div className="mt-75">Laissez-nous quelques secondes pour travailler avec votre voix...</div>
+      </div>}
+      
       {wavLaunch &&  (
+      <div className="content-flex content-flex__justify-center">
         <div id="AudioPlayer">
           <AudioPlayer audioArray={JSON.parse(localStorage.getItem("wavPaths")).reverse()}/>
         </div>
-      )}
       </div>
+      )}
     </Fragment>
   );
 };

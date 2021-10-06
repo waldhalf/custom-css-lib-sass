@@ -242,9 +242,7 @@
      -moz-transform: rotateY(0deg);
  } */
 .homePageLogo{
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   margin: 50px;
   z-index: 1000;
 }
