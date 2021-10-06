@@ -211,7 +211,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
 
   return (
     <Fragment>
-      <div className="content-flex content-flex__justify-center">
+      <div className="content-flex content-flex__justify-center first">
       {connection === undefined && (
         <div className={props.cssClass}>
           <button onClick={connect}>Commencer</button>
@@ -222,9 +222,9 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
           <button onClick={disconnect}>Terminer</button>
         </div>
       )}
-
       </div>
-      <div className="content-flex content-flex__justify-center">
+
+      <div className="content-flex content-flex__justify-center second">
       {waitingMessage && <div className="mt-75">Laissez-nous quelques secondes pour travailler avec votre voix...</div>}
       {wavLaunch &&  (
         <div id="AudioPlayer">

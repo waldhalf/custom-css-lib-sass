@@ -581,9 +581,9 @@ $speed: 0.5s;
   }
 
   &__pressable {
-    position: static;
-    display: inline-block;
-    margin: rem(20);
+    // position: static;
+    // display: inline-block;
+    // margin: rem(20);
     &--orange {
       button {
         color: white;
