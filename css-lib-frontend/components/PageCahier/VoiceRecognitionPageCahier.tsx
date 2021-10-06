@@ -103,6 +103,8 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
   );
   const [wavLaunch, setWavLaunch] = useState<boolean>(false);
   const [showStop, setShowStop] = useState<boolean>(false);
+  const [waitingMessage, setWaitingMessage] = useState<boolean>(false);
+
   const speechRecognized = (data) => {
     if (data?.type === SET_LIVE_TRANSCRIPT) {
       setCurrentRecognition(data.transcript);
@@ -165,7 +167,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     setConnection(undefined);
     props.customerSpeech([""]);
     props.customerSpeechEn([""]);
-
+      setWaitingMessage(true);
     let nbWavQuery = localStorage.getItem("nbWavQuery");
     let nbWavTot = localStorage.getItem("nbWavTot");
     if(nbWavQuery === null || nbWavTot === null) return
@@ -174,6 +176,9 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     setTimeout(function () {
         setWavLaunch(true)
     }, 7000);
+    setTimeout(function () {
+      setWavLaunch(false)
+  }, 7000);
   };
 
 
@@ -222,6 +227,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
 
       </div>
       <div className="content-flex content-flex__justify-center">
+      {waitingMessage && <div className="mt-75">Laissez-nous quelques secondes pour travailler avec votre voix...</div>}
       {wavLaunch &&  (
         <div id="AudioPlayer">
           <AudioPlayer audioArray={JSON.parse(localStorage.getItem("wavPaths")).reverse()}/>
