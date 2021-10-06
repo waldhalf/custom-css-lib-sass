@@ -241,7 +241,13 @@
      -webkit-transform: rotateY(0deg);
      -moz-transform: rotateY(0deg);
  } */
-
+.homePageLogo{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 50px;
+  z-index: 1000;
+}
 .homePageIMAlogoCentered {
   position: absolute;
   top: 50%;
