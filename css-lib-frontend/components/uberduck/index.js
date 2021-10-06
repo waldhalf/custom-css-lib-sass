@@ -25,7 +25,7 @@ function UberduckComponent() {
     }
 
     return (<div className="container">
-        <div className="content-flex content-flex__justify-center mt-100 " onClick={handlerCountdown}>
+        <div className="mt-100 " onClick={handlerCountdown}>
             <VoiceRecognitionPageCahier
                 cssClass="btn__pressable--blue"
                 customerSpeech={SetHistoryRecognition}

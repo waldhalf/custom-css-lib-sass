@@ -33,6 +33,7 @@ const Box = (props) => {
             mdv={props.mdv}
             sentiment={props.sentiment}
             panne={props.panne}
+            weather={props.weather}
         />
     );
 };
@@ -84,6 +85,7 @@ function CockpitGrid() {
     const [currentConducteurCockpit, setCurrentConducteurCockpitt] = useState('');
     const [currentAssureurCockpit, setCurrentAssureurCockpit] = useState('');
     const [currentTiresCockpit, setCurrentTiresCockpit] = useState('');
+    const [currentWeatherCockpit, setCurrentWeatherCockpit] = useState('');
 
 
     const [lines] = useState([
@@ -215,6 +217,7 @@ function CockpitGrid() {
                         <Box box={boxCODEQ}
                             sentiment={currentSentimentCockpit} />
                         <Box box={boxMETEO}
+                            weather={currentWeatherCockpit}
                         />
                         {/* FILE INFO */}
                         <Box box={boxEntities}
@@ -231,6 +234,7 @@ function CockpitGrid() {
                             historyRecognition={historyRecognition}
                         />
                         <Box box={boxANCHOR_METEO} />
+
                         <Box box={boxANCHOR_CODEQ} />
 
                         <div className={duringPopUp}>
@@ -258,6 +262,7 @@ function CockpitGrid() {
                         currentConducteurCockpit={setCurrentConducteurCockpitt}
                         currentAssureurCockpit={setCurrentAssureurCockpit}
                         currentTiresCockpit={setCurrentTiresCockpit}
+                        currentWeatherCockpit={setCurrentWeatherCockpit}
                     />
                 </div>
 

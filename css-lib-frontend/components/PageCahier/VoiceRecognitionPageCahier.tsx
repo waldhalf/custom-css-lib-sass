@@ -102,7 +102,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     []
   );
   const [wavLaunch, setWavLaunch] = useState<boolean>(false);
-  const [showStop, setShowStop] = useState(false);
+  const [showStop, setShowStop] = useState<boolean>(false);
   const speechRecognized = (data) => {
     if (data?.type === SET_LIVE_TRANSCRIPT) {
       setCurrentRecognition(data.transcript);
@@ -112,8 +112,6 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
     if (data.type === SET_LIVE_TRADUCTION) {
       const myText = data.text.replaceAll("&#39;", "'");
       props.customerSpeechEn((old) => [...old, myText]);
-      console.log("____current recognition____");
-      console.log(myText);
       getVoice(myText);
     }
   };
@@ -210,6 +208,7 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
 
   return (
     <Fragment>
+      <div className="content-flex content-flex__justify-center">
       {connection === undefined && (
         <div className={props.cssClass}>
           <button onClick={connect}>Commencer</button>
@@ -221,11 +220,14 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
         </div>
       )}
 
+      </div>
+      <div className="content-flex content-flex__justify-center">
       {wavLaunch &&  (
         <div id="AudioPlayer">
           <AudioPlayer audioArray={JSON.parse(localStorage.getItem("wavPaths")).reverse()}/>
         </div>
       )}
+      </div>
     </Fragment>
   );
 };

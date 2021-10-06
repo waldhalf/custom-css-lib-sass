@@ -34,10 +34,10 @@ class AudioPlayer extends React.Component {
     }
 
     render() {
-        const {src, type} = this.state;
+        const { src, type } = this.state;
         return (
             <>
-                <ReactPlayer onEnded={this.setAudio} playing controls url={[{src: src, type: type}]}/>
+                <ReactPlayer onEnded={this.setAudio} playing controls url={[{ src: src, type: type }]} />
             </>
         )
     }

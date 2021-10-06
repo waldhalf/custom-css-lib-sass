@@ -60,14 +60,18 @@ interface Props {
   currentMDVCockpit: (data) => void;
   currentSentimentCockpit: (data) => void;
   currentIncidentCockpit: (data) => void;
+  currentWeatherCockpit: (data) => void;
   isAudioOpen: boolean;
   buttonType: string;
 }
 
 const VoiceStreamer: React.FC<Props> = (props: Props) => {
   const [connection, setConnection] = useState<WebSocket>();
+  const [showStop, setShowStop] = useState<boolean>(false);
 
-  const [showStop, setShowStop] = useState(false);
+   // MOCK WEATHER DATA 
+  const mockWeather = { "coord": { "lon": -0.3333, "lat": 46.3333 }, "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d" }], "base": "stations", "main": { "temp": 15.13, "feels_like": 14.68, "temp_min": 14.84, "temp_max": 16.83, "pressure": 1012, "humidity": 76 }, "visibility": 10000, "wind": { "speed": 1.79, "deg": 279, "gust": 5.36 }, "clouds": { "all": 64 }, "dt": 1633428544, "sys": { "type": 2, "id": 2039202, "country": "FR", "sunrise": 1633413899, "sunset": 1633455253 }, "timezone": 7200, "id": 2990354, "name": "Arrondissement de Niort", "cod": 200 };
+
   const speechRecognized = (data) => {
     if (data?.type === SET_LIVE_TRANSCRIPT) {
       props.currentRecognitionCockpit(data.transcript);
@@ -77,12 +81,12 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
       data = data.data;
       if (data.type === ADDRESS) {
         props.currentAddressCockpit(data.name);
+        props.currentWeatherCockpit(mockWeather);
       }
       if (data.type.startsWith("VEH")) {
         props.currentIncidentCockpit(data.name);
       }
       if (data.type === CODEQ_SENTIMENT) {
-        console.log(data.name[0]?.sentiments[0]);
         props.currentSentimentCockpit(data.name[0]?.sentiments[0]);
       }
       if (data.type === MDV) {

@@ -5,6 +5,11 @@ function CockpitItem(props) {
     const { name, img } = props
     const cssClassName = `cockpit__${name}`.toLowerCase();
 
+    if (props.weather) {
+        console.log('___WEATHER___');
+        console.log(props.weather);
+    }
+
     return (<div ref={props.myRef} id={props.id} className={cssClassName}>
         <div className={`cockpit__card__container `}>
             <Image className="cockpit__card__image" src={img} alt={name} layout="fill" />
@@ -37,6 +42,14 @@ function CockpitItem(props) {
                         <h4>Sentiment :</h4>
                         <p>{props.sentiment}</p>
                     </Fragment>}
+
+                    {props.weather && <Fragment>
+                        <h4>Météo</h4>
+                        <p>{props.weather.name}</p>
+                        <p>{props.weather.main.temp} °C</p>
+                        <p>{props.weather.weather[0].description}</p>
+                    </Fragment>}
+
 
                 </div>
             </div>

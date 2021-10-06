@@ -32,3 +32,8 @@ $sides: (top, bottom, left, right); // Leave this variable alone
 .m-10 {
   margin: rem(10);
 }
+
+
+.w-100{
+  flex: 0 0 100%;
+}
