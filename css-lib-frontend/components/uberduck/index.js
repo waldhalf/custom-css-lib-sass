@@ -23,7 +23,7 @@ function UberduckComponent() {
     function handlerCountdown() {
         setStartCoundown(!startCoundown);
     }
-
+    // faire passer la prop handlerCountdown
     return (<div className="container">
         <div className="mt-100 " onClick={handlerCountdown}>
             <VoiceRecognitionPageCahier

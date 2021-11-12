@@ -225,12 +225,12 @@ const VoiceStreamer: React.FC<Props> = (props: Props) => {
       </div>
       )}
 
-      {waitingMessage && 
+      {waitingMessage && (
       <div className="content-flex content-flex__justify-center">
         <div className="mt-75">Laissez-nous quelques secondes pour travailler avec votre voix...</div>
-      </div>}
-      
-      {wavLaunch &&  (
+      </div>)}
+
+      {wavLaunch && (
       <div className="content-flex content-flex__justify-center">
         <div id="AudioPlayer">
           <AudioPlayer audioArray={JSON.parse(localStorage.getItem("wavPaths")).reverse()}/>
